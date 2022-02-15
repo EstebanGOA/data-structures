@@ -24,4 +24,8 @@ public class User {
     public MyFollowerList getFollowsList() {
         return followsList;
     }
+
+    public int getId() {
+        return id;
+    }
 }

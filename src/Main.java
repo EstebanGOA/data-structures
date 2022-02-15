@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
-
+        /*
         // Usuarios de prueba
         User u1 = new User(1, "Pablo", "Pablito", new String[] { "Deportes", "Series" });
         User u2 = new User(2, "Marc", "Marc", new String[] { "Parchís", "Series" });
@@ -27,6 +27,15 @@ public class Main {
         // TODO: Con la lista implementada la función para usar un bucle foreach no funciona, por el momento lo tendremos que hacer así.
         for (int i = 0; i < u1.getFollowsList().size(); i++) {
             System.out.println(u1.getFollowsList().get(i).getIdUser());
+        }
+        */
+         UserReader userReader = new UserReader();
+        User[] users = userReader.readFile("data/graphS.paed");
+        for (User user : users){
+            System.out.println(user.getId());
+            if(user.getFollowsList().get(0) != null) {
+                System.out.println(user.getFollowsList().get(0).getIdUser());
+            }
         }
 
     }
