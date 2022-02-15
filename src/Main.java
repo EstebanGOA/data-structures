@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
+        Menu menu = new Menu();
+
         /*
         // Usuarios de prueba
         User u1 = new User(1, "Pablo", "Pablito", new String[] { "Deportes", "Series" });
@@ -29,6 +31,7 @@ public class Main {
             System.out.println(u1.getFollowsList().get(i).getIdUser());
         }
         */
+
          UserReader userReader = new UserReader();
         User[] users = userReader.readFile("data/graphS.paed");
         for (User user : users){
