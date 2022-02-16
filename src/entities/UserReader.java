@@ -21,11 +21,16 @@ public class UserReader {
                 numUsers = Integer.parseInt(myReader.nextLine());
 
                 User[] users = new User[numUsers];
-
+                String[] interests;
                 for (int i = 0; i < numUsers; i++) {
                     String input = myReader.nextLine();
                     String[] inputParse = input.split(";");
-                    String[] interests = inputParse[3].split(",");
+                    if(inputParse.length >3) {
+                        interests = inputParse[3].split(",");
+                    } else {
+                        interests = null;
+                    }
+
                     User user = new User(Integer.parseInt(inputParse[0]), inputParse[1], inputParse[2], interests);
                     users[i] = user;
                 }

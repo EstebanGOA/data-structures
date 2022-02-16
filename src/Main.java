@@ -1,4 +1,6 @@
+import entities.Algorithm;
 import entities.Menu;
+import entities.User;
 
 public class Main {
     public static void main(String[] args) {
@@ -32,13 +34,14 @@ public class Main {
 
          entities.UserReader userReader = new entities.UserReader();
         User[] users = userReader.readFile("data/graphS.paed");
-        for (User user : users){
-            System.out.println(user.getId());
-            if(user.getFollowsList().get(0) != null) {
-                System.out.println(user.getFollowsList().get(0).getIdUser());
-            }
-        }
+
+        Algorithm algorithm = new Algorithm();
+
+
+        User u = algorithm.binarySearch(users, 124, 0, users.length);
+        System.out.println(u.getName());
         */
+
 
     }
 }
