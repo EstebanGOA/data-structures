@@ -1,6 +1,5 @@
-import jdk.swing.interop.SwingInterOpUtils;
+package entities;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Menu {

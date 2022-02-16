@@ -1,8 +1,4 @@
-import entities.Follow;
-import entities.MyFollowerList;
-import entities.User;
-
-import java.util.ArrayList;
+import entities.Menu;
 
 public class Main {
     public static void main(String[] args) {
@@ -34,7 +30,7 @@ public class Main {
         }
 
 
-         UserReader userReader = new UserReader();
+         entities.UserReader userReader = new entities.UserReader();
         User[] users = userReader.readFile("data/graphS.paed");
         for (User user : users){
             System.out.println(user.getId());

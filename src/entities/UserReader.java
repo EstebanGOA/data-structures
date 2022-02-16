@@ -1,3 +1,5 @@
+package entities;
+
 import entities.Follow;
 import entities.User;
 
