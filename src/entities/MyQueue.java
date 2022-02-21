@@ -49,18 +49,28 @@ public class MyQueue {
         return size;
     }
 
+    /**
+     * Se usa antes del get para asegurar que aun hay datos en la queue y para al acabar, asegurar que la queue esta vacia
+     */
+    public boolean isEmpty(){
+        if(size==0){
+            return true;
+        }
+        return false;
+    }
+
     public User get(int d){
-        User user;
+ /*     User user;
         try {
             user = new User(this.u[d-1].getId(), this.u[d-1].getName(), this.u[d-1].getAlias(), this.u[d-1].getInterests());
             /**
              * si el u[d-1] no existe, al copiarlo en user dara error, lo q no se como hacer es que me devuelva si error, devuelvo un user vacio??
-             */
-        }
-        catch (ArrayIndexOutOfBoundsException e){
-            System.out.println(e);
-        }
-
+             **
+          }
+          catch (ArrayIndexOutOfBoundsException e){
+              System.out.println(e);
+          }
+*/
         return this.u[d-1];
     }
 
