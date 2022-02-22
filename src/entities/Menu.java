@@ -5,10 +5,14 @@ import java.util.Scanner;
 public class Menu {
 
     private final Scanner scanner;
+    private User[] users;
+    private final String path = "../data/graphL.paed";
 
     public Menu() {
         this.scanner = new Scanner(System.in);
+        this.users = new UserReader().readFile(path);
     }
+
 
     public void run() {
         boolean exit = false;
