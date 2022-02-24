@@ -9,12 +9,12 @@ import java.util.Iterator;
 /**
  * Versión genérica de un Array.
  *
- * @param <T> tipo de valor que vamos a almacenar.
+ * @param <E> tipo de valor que vamos a almacenar.
  */
 public class ArrayList<E> {
 
     /**
-     * Array donde guardaremos la información relevante a los usuarios que sigue un individuo.
+     * Array donde guardaremos la información del objeto a almacenar.
      */
     private Object[] items;
 
@@ -34,10 +34,20 @@ public class ArrayList<E> {
         this.size = 0;
     }
 
+    /**
+     *  Informará sobre el tamaño actual de la lista.
+     *
+     * @return Valor entero con el tamaño actual de la lista.
+     */
     public int size() {
         return size;
     }
 
+    /**
+     * Informará si nuestra lista esta vacía.
+     *
+     * @return Booleano que nos indicará si la lista esta vacía, devolverá true si es así, en caso contrario false.
+     */
     public boolean isEmpty() {
         return size == 0;
     }
@@ -50,6 +60,11 @@ public class ArrayList<E> {
         return false;
     }
 
+    /**
+     * Nos transformará nuestra lista en un array estático.
+     *
+     * @return Array estático con los datos actuales de la lista.
+     */
     public Object[] toArray() {
         return Arrays.copyOf(items, size);
     }
@@ -81,7 +96,11 @@ public class ArrayList<E> {
         return grow(size + 1);
     }
 
-
+    /**
+     * Elimina un elemento de nuestra lista.
+     *
+     * @param o Elemento a eliminar en nuestra lista.
+     */
     public void remove(Object o) {
         Object[] auxiliar = new Object[size-1];
         int index = 0;
@@ -92,13 +111,15 @@ public class ArrayList<E> {
             }
         }
         items = auxiliar;
+        size -= 1;
     }
 
     /**
+     * Recoge el elemento que se encuentre en una posición indicada.
      *
-     * @param index
-     * @return
-     * @throws IndexOutOfBoundsException
+     * @param index Valor entero que indica la posición donde se encuentra el elemento indicado.
+     * @return Elemento situado en la posición indicada.
+     * @throws IndexOutOfBoundsException Si la posición indicada es negativo o superior al tamaño de la lista saltará la excepción.
      */
     @SuppressWarnings("unchecked")
     public E get(int index) throws IndexOutOfBoundsException {
@@ -108,6 +129,9 @@ public class ArrayList<E> {
             throw new IndexOutOfBoundsException();
     }
 
+    /**
+     * Borrará toda la información almacenada en la lista.
+     */
     public void clear() {
         items = new Object[DEFAULT_CAPACITY];
         size = 0;
