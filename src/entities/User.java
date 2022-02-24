@@ -1,6 +1,7 @@
 package entities;
 
-import entities.MyFollowerList;
+import utilities.ArrayList;
+import utilities.MyFollowerList;
 
 public class User {
 
@@ -9,7 +10,7 @@ public class User {
     private final String alias;
     private final String[] interests;
     private boolean visited;
-    private MyFollowerList followsList;
+    private ArrayList<Follow> follows;
 
     public User(int id, String name, String alias, String[] interests) {
         this.id = id;
@@ -17,15 +18,15 @@ public class User {
         this.alias = alias;
         this.interests = interests;
         this.visited = false;
-        this.followsList = new MyFollowerList();
+        this.follows = new ArrayList<Follow>();
     }
 
-    public void setFollows(MyFollowerList followsList) {
-        this.followsList = followsList;
+    public void setFollows(ArrayList<Follow> follows) {
+        this.follows = follows;
     }
 
-    public MyFollowerList getFollowsList() {
-        return followsList;
+    public ArrayList<Follow> getFollows() {
+        return follows;
     }
 
     public int getId() {
@@ -42,6 +43,10 @@ public class User {
 
     public String[] getInterests() {
         return interests;
+    }
+
+    public boolean isVisited() {
+        return visited;
     }
 
     public void setVisited(boolean visited) {

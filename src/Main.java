@@ -27,8 +27,8 @@ public class Main {
         u1.setFollows(followerList);
 
         // TODO: Con la lista implementada la función para usar un bucle foreach no funciona, por el momento lo tendremos que hacer así.
-        for (int i = 0; i < u1.getFollowsList().size(); i++) {
-            System.out.println(u1.getFollowsList().get(i).getIdUser());
+        for (int i = 0; i < u1.getFollows().size(); i++) {
+            System.out.println(u1.getFollows().get(i).getIdUser());
         }
 
 

@@ -1,16 +1,17 @@
 package entities;
 
+import graphs.NetworkScan;
+
 import java.util.Scanner;
 
 public class Menu {
 
     private final Scanner scanner;
     private User[] users;
-    private final String path = "../data/graphL.paed";
 
     public Menu() {
         this.scanner = new Scanner(System.in);
-        this.users = new UserReader().readFile(path);
+        this.users = new UserReader().readFile();
     }
 
 
@@ -42,7 +43,10 @@ public class Menu {
             String option = askForString("Quina funcionalitat vols executar?");
             switch (option) {
                 case "A" -> {
-                    System.out.println("Opción A");
+                    NetworkScan nScan = new NetworkScan(users);
+                    Algorithm a = new Algorithm();
+                    User[] users = a.sortByFollows(this.users, 0, this.users.length-1);
+                    nScan.bfs(users, users[0]);
                 }
                 case "B" -> {
                     System.out.println("Opción B");
