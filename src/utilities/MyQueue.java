@@ -13,7 +13,6 @@ public class MyQueue {
 
     private static final int DEFAULT_CAPACITY = 10;
 
-
     public MyQueue() {
         this.users = new User[DEFAULT_CAPACITY];
         this.size = 0;

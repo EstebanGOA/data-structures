@@ -40,13 +40,12 @@ public class Menu {
     private void executeFirstOption() {
         while (true) {
             followersMenu();
-            String option = askForString("Quina funcionalitat vols executar?");
+            String option = askForString("Quina funcionalitat vols executar? ");
+            System.out.println();
             switch (option) {
                 case "A" -> {
                     NetworkScan nScan = new NetworkScan(users);
-                    Algorithm a = new Algorithm();
-                    User[] users = a.sortByFollows(this.users, 0, this.users.length-1);
-                    nScan.bfs(users, users[0]);
+                    nScan.run();
                 }
                 case "B" -> {
                     System.out.println("Opción B");
