@@ -2,11 +2,13 @@ import entities.Algorithm;
 import entities.Menu;
 import entities.User;
 
+import java.util.ArrayList;
+
 public class Main {
     public static void main(String[] args) {
 
-        //Menu menu = new Menu();
-        //menu.run();
+        Menu menu = new Menu();
+        menu.run();
 
         /*
         // Usuarios de prueba
@@ -30,7 +32,7 @@ public class Main {
         for (int i = 0; i < u1.getFollows().size(); i++) {
             System.out.println(u1.getFollows().get(i).getIdUser());
         }
-        */
+
 
          entities.UserReader userReader = new entities.UserReader();
         User[] users = userReader.readFile("data/graphXS.paed");
@@ -40,6 +42,8 @@ public class Main {
 
         int i = algorithm.binSearch(users, 2, 0, users.length);
         System.out.println(i);
+
+        */
 
 
 

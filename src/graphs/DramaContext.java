@@ -5,16 +5,25 @@ import entities.Follow;
 import utilities.MyQueue;
 import entities.User;
 
+import java.util.Arrays;
+
 public class DramaContext {
 
-    Algorithm algorithm = new Algorithm();
+    private User[] users;
+    private Algorithm algorithm;
 
-    public MyQueue topoSort(User[] users){
+    public DramaContext(User[] users){
+        this.users = Arrays.copyOf(users, users.length);
+        algorithm = new Algorithm();
+    }
+    public void topoSort(){
         MyQueue queue = new MyQueue();
         MyQueue usersQueue = getNodes(users); // Queue with all the nodes that aren't being followed
 
         while (!usersQueue.isEmpty()) {
-            User u = usersQueue.pop();
+
+            User u = usersQueue.get();
+            usersQueue.remove();
             queue.add(u);
             for (int i = 0; i < u.getFollowed().size(); i++) {
 
@@ -22,14 +31,28 @@ public class DramaContext {
 
                 for(int j = 0; j < users[index].getFollows().size(); j++) {
                     // Remove the follows
-                    users[index].getFollows().
+
+                    if(users[index].getFollows().get(j).getIdUser() == u.getId()){
+                        users[index].getFollows().remove(users[index].getFollows().get(j));
+
+
+                        if(users[index].getFollows().isEmpty()){
+                            usersQueue.add(users[index]);
+                        }
+                    }
 
                 }
             }
 
         }
 
-        return queue;
+        while(!queue.isEmpty()){
+            User u = queue.get();
+            queue.remove();
+            System.out.println(u.getId() + " - " + u.getName() + " (" + u.getAlias() + ")");
+            if(!queue.isEmpty())  System.out.println("↓");
+        }
+
     }
 
     /**
@@ -42,7 +65,7 @@ public class DramaContext {
 
         // Check if the user is followed
         for(User u: users){
-            if( u.getFollows() == null){
+            if( u.getFollows().size() == 0){
                 queue.add(u);
             }
         }

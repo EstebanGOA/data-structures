@@ -1,5 +1,6 @@
 package entities;
 
+import graphs.DramaContext;
 import graphs.NetworkScan;
 
 import java.util.Scanner;
@@ -48,10 +49,13 @@ public class Menu {
                     nScan.run();
                 }
                 case "B" -> {
-                    System.out.println("Opción B");
+
+
                 }
                 case "C" -> {
-                    System.out.println("Opción C");
+                    DramaContext dramaC = new DramaContext(users);
+                    dramaC.topoSort();
+
                 }
                 case "D" -> {
                     System.out.println("Opción D");
