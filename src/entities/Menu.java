@@ -1,14 +1,19 @@
 package entities;
 
+import graphs.NetworkScan;
+
 import java.util.Scanner;
 
 public class Menu {
 
     private final Scanner scanner;
+    private User[] users;
 
     public Menu() {
         this.scanner = new Scanner(System.in);
+        this.users = new UserReader().readFile();
     }
+
 
     public void run() {
         boolean exit = false;
@@ -35,10 +40,12 @@ public class Menu {
     private void executeFirstOption() {
         while (true) {
             followersMenu();
-            String option = askForString("Quina funcionalitat vols executar?");
+            String option = askForString("Quina funcionalitat vols executar? ");
+            System.out.println();
             switch (option) {
                 case "A" -> {
-                    System.out.println("Opción A");
+                    NetworkScan nScan = new NetworkScan(users);
+                    nScan.run();
                 }
                 case "B" -> {
                     System.out.println("Opción B");

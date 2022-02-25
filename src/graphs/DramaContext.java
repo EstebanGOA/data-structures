@@ -2,7 +2,7 @@ package graphs;
 
 import entities.Algorithm;
 import entities.Follow;
-import entities.MyQueue;
+import utilities.MyQueue;
 import entities.User;
 
 public class DramaContext {
@@ -16,13 +16,13 @@ public class DramaContext {
         while (!usersQueue.isEmpty()) {
             User u = usersQueue.pop();
             queue.add(u);
-            for (int i = 0; i < u.getFollowedList().size(); i++) {
+            for (int i = 0; i < u.getFollowed().size(); i++) {
 
-                int index = algorithm.binSearch(users, u.getFollowedList().get(i).getIdUser(), 0, users.length);
+                int index = algorithm.binSearch(users, u.getFollowed().get(i).getIdUser(), 0, users.length);
 
-                for(int j = 0; j < users[index].getFollowsList().size(); j++) {
+                for(int j = 0; j < users[index].getFollows().size(); j++) {
                     // Remove the follows
-                    users[index].getFollowsList().
+                    users[index].getFollows().
 
                 }
             }
@@ -42,7 +42,7 @@ public class DramaContext {
 
         // Check if the user is followed
         for(User u: users){
-            if( u.getFollowsList() == null){
+            if( u.getFollows() == null){
                 queue.add(u);
             }
         }

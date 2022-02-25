@@ -1,6 +1,9 @@
 package entities;
 
-import entities.MyFollowerList;
+import utilities.ArrayList;
+import utilities.MyFollowerList;
+
+import java.util.Arrays;
 
 public class User {
 
@@ -9,8 +12,8 @@ public class User {
     private final String alias;
     private final String[] interests;
     private boolean visited;
-    private MyFollowerList followerList;
-    private MyFollowerList followedList;
+    private ArrayList<Follow> follows;
+    private ArrayList<Follow> followed;
 
     public User(int id, String name, String alias, String[] interests) {
         this.id = id;
@@ -18,15 +21,20 @@ public class User {
         this.alias = alias;
         this.interests = interests;
         this.visited = false;
-        this.followedList = new MyFollowerList();
+        this.follows = new ArrayList<Follow>();
+        this.followed = new ArrayList<>();
     }
 
-    public void setFollows(MyFollowerList followsList) {
-        this.followedList = followsList;
+    public void setFollows(ArrayList<Follow> follows) {
+        this.follows = follows;
     }
 
-    public MyFollowerList getFollowsList() {
-        return followedList;
+    public ArrayList<Follow> getFollowed() {
+        return followed;
+    }
+
+    public ArrayList<Follow> getFollows() {
+        return follows;
     }
 
     public int getId() {
@@ -45,16 +53,27 @@ public class User {
         return interests;
     }
 
-    public void setVisited(boolean visited) {
-        this.visited = visited;
-    }
-
     public boolean isVisited() {
         return visited;
     }
 
-    public MyFollowerList getFollowedList() {
-        return followedList;
+    public void setVisited(boolean visited) {
+        this.visited = visited;
     }
 
+
+
+    @Override
+    public String toString() {
+        StringBuilder string = new StringBuilder("\t" + id + " - " + name + " (" + alias + ")\n\tInteressos: ");
+        if (interests != null) {
+            for (int i = 0; i < interests.length; i++) {
+                if (i != interests.length - 1)
+                    string.append(interests[i]).append(",");
+                else
+                    string.append(interests[i]);
+            }
+        }
+        return string.append("\n").toString();
+    }
 }
