@@ -24,7 +24,7 @@ public class MyQueue {
     }
 
     private void grow(){
-       User[] u= new User[size];
+       User[] u= new User[size + 1];
        for(int i=0;i<size-1;i++){
            u[i]=this.u[i];
        }
@@ -39,11 +39,19 @@ public class MyQueue {
         this.u=u;
     }
 
-    public void remove(Integer d){
+    public void remove(){
         //removeo el posicion 0 y muevo todp el resto a -1
         decrease();
         size--;
     }
+
+    public User pop(){
+        //removeo el posicion 0 y muevo todp el resto a -1
+        decrease();
+        size--;
+        return u[size];
+    }
+
 
     public int size(){
         return size;

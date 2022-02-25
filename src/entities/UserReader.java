@@ -39,13 +39,28 @@ public class UserReader {
                 for (int i = 0; i < numInteractions; i++) {
                     String input = myReader.nextLine();
                     String[] inputParse = input.split(";");
-                    Follow follow = new Follow(Integer.parseInt(inputParse[1]),
+                    Follow followed = new Follow(Integer.parseInt(inputParse[1]),
+                            Integer.parseInt(inputParse[2]),
+                            Integer.parseInt(inputParse[3]));
+                    Follow follower = new Follow(Integer.parseInt(inputParse[0]),
                             Integer.parseInt(inputParse[2]),
                             Integer.parseInt(inputParse[3]));
 
+                    /*
+                        A -> B
+                        We add to A that he follows B on the A user
+                        and also that B is being followed by A in the B user
+                    */
+
                     for (int j = 0; j < users.length; j++) {
+                        // If to add the interaction to the one who follows the other user
                         if (Integer.parseInt(inputParse[0]) == users[j].getId()) {
-                            users[j].getFollowsList().add(follow);
+                            users[j].getFollowedList().add(followed);
+                        }
+
+                        // If to add the interaction to the one who is followed by the other user
+                        if (Integer.parseInt(inputParse[1]) == users[j].getId()) {
+                            users[j].getFollowsList().add(follower);
                         }
                     }
 
