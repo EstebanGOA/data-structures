@@ -82,7 +82,7 @@ public class ArrayList<E> {
      * @param desiredCapacity tamaño hasta el que incrementaremos el Array.
      */
     private Object[] grow(int desiredCapacity) {
-        Object[] auxiliar = new Follow[desiredCapacity];
+        Object[] auxiliar = new Object[desiredCapacity];
         for (int i = 0; i < items.length; i++) {
             auxiliar[i] = items[i];
         }
@@ -104,9 +104,9 @@ public class ArrayList<E> {
     public void remove(Object o) {
         Object[] auxiliar = new Object[size-1];
         int index = 0;
-        for (Object item : items) {
-            if (!item.equals(o)) {
-                auxiliar[index] = item;
+        for (int i = 0; i < size; i++) {
+            if (!items[i].equals(o)) {
+                auxiliar[index] = items[i];
                 index++;
             }
         }

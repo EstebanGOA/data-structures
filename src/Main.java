@@ -1,10 +1,10 @@
 import entities.Algorithm;
 import entities.Menu;
 import entities.User;
+import utilities.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
-
         Menu menu = new Menu();
         menu.run();
 

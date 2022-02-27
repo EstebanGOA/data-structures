@@ -11,11 +11,13 @@ import java.util.Arrays;
 public class NetworkScan {
 
     private final User[] users;
+    private MyQueue queue;
     private final Algorithm a;
 
     // BFS
     public NetworkScan(User[] users) {
         this.users = Arrays.copyOf(users, users.length);
+        this.queue = new MyQueue();
         this.a = new Algorithm();
     }
 
@@ -38,35 +40,56 @@ public class NetworkScan {
 
     private void bfs(User[] users, User user) {
 
+        queue.add(user);
         user.setVisited(true);
-        MyQueue queue = getUserFollows(user);
 
         while (!queue.isEmpty()) {
+
             User u = queue.get();
-            if (!u.isVisited()) {
-                bfs(users, u);
-            }
             queue.remove();
+            ArrayList<User> adjacents = getUserFollows(u);
+
+            if (!adjacents.isEmpty())
+                System.out.println("Aquests són els comptes que segueix al usuari " + u.getId() + " : \n");
+
+            for (int i = 0; i < adjacents.size(); i++) {
+
+                User adj = adjacents.get(i);
+                System.out.println(adj.toString());
+
+                if (!adj.isVisited()) {
+                    queue.add(adjacents.get(i));
+                    adj.setVisited(true);
+                }
+            }
+
         }
 
     }
 
-    private MyQueue getUserFollows(User user) {
-        MyQueue queue = new MyQueue();
-        ArrayList<Follow> follows = user.getFollows();
+    /**
+     * Nos devolverá todos los nodos/usuarios adyacentes del nodo/usuario actual.
+     *
+     * @param user nodo/usuario actual.
+     * @return cola con los nodos/usuarios adyacentes del nodo/usuario actual.
+     */
+    private ArrayList<User> getUserFollows(User user) {
 
-        if (!follows.isEmpty())
-            System.out.println("Aquests són els comptes que segueixen: \n");
+        ArrayList<Follow> follows = user.getFollows();
+        ArrayList<User> adjacents = new ArrayList<>();
+
+        if (follows.isEmpty())
+            return adjacents;
 
         for (int i = 0; i < follows.size(); i++) {
             int objectiveId = follows.get(i).getIdUser();
+            // Debido a que solo tenemos el identificador del usuario usaremos una búsqueda binaria para encontrar al usuario con dicho identificador.
             User u = a.binarySearch(this.users, objectiveId, 0, this.users.length-1);
-            if (!u.isVisited()) {
-                System.out.println(u.toString());
-                queue.add(u);
-            }
+            // Añadiremos todos los nodos adyacentes al nodo actual.
+            adjacents.add(u);
         }
-        return queue;
+
+        return adjacents;
     }
 
 }
