@@ -1,6 +1,7 @@
 package entities;
 
 import graphs.DramaContext;
+import graphs.FacilitacioNet;
 import graphs.NetworkScan;
 
 import java.util.Scanner;
@@ -58,7 +59,10 @@ public class Menu {
 
                 }
                 case "D" -> {
-                    System.out.println("Opción D");
+                    int nodeA = askForInteger("Entra el teu identificador: ");
+                    int nodeB = askForInteger("Entra l'identificador de l'altre usuari: ");
+                    FacilitacioNet facilitacioNet = new FacilitacioNet(users, nodeA, nodeB);
+                    facilitacioNet.dijkstra();
                 }
                 case "E" -> {
                     return ;

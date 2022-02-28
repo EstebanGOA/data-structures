@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class UserReader {
 
-    private final String path = "data/dagXL.paed";
+    private final String path = "data/dagXS.paed";
 
     public User[] readFile() {
 
