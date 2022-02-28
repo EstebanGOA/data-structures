@@ -59,6 +59,7 @@ public class MyQueue {
         return false;
     }
 
+    // este es posible que lo eliminemos, porque en una cola siempre se coge el 1r user, no un user (n)
     public User get(int d){
  /*     User user;
         try {
