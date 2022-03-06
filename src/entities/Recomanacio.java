@@ -10,8 +10,6 @@ public class Recomanacio {
      */
 
 
-    private int interessos = 0;           // priorizacion de cuentas que comparten interes con el usuario
-
     /**
      * para esta funcion se pasara 1 user concreto (s) que es el que miramos si tiene
      * a (u) como seguidor
@@ -23,28 +21,30 @@ public class Recomanacio {
 
 
         // pone a true si el user ya lo sigue, asi luego con un isJaSegueix
-        // nos lo podemos saltar
-        for (i = 0; i < u.length; i++) {
+        // nos lo podemos saltar luego con este campo
+        for (i = 0; i < s.getFollowed().size(); i++) {
+
             u[i].setJaSegueix(alreadySegueix(u[i], s));
         }
 
         //si el user (s) es seguido por el user (u), el user (u) tendra el
         // getSeguidor a true
         for (j = 0; j < u.length; j++) {
-            for (i = 0; i < u[j].getFollowsList().size(); i++) {
-                if (u[j].getFollowsList().get(i).getIdUser() == s.getId()) u[j].setPoints(u[j].getPoints()+1);
+            for (i = 0; i < u[j].getFollows().size(); i++) {
+                if (u[j].getFollows().get(i).getIdUser() == s.getId()) u[j].setPoints(u[j].getPoints()+1);
             }
         }
 
-        // todos los users que siguen mis seguidores tendran un true
-        // en isSeguidasPorSeguidor
-        for (j = 0; j < s.getFollowsList().size(); j++) {
-            id1 = s.getFollowsList().get(j).getIdUser();
+
+        // todos los users que siguen mis seguidores tendran +1 en points
+        for (j = 0; j < s.getFollows().size(); j++) {
+            id1 = s.getFollows().get(j).getIdUser();
             for (k = 0; k < u.length; k++) {
                 if (u[k].getId() == id1) u[k].setPoints(u[k].getPoints()+1);
             }
         }
 
+        // cada user u que tenga 1 interes en comun con mi user s tendra +0.1 en el campo punts
         for(j=0;j<u.length;j++){
             for(k=0;k<u[j].getInterests().length;k++){
                 for(i=0;i<s.getInterests().length;i++){
@@ -52,6 +52,7 @@ public class Recomanacio {
                 }
             }
         }
+
         k=0;
         for(i=0;i<u.length;i++){
             if(u[i].isJaSegueix()) k++;
@@ -66,11 +67,27 @@ public class Recomanacio {
         return users;
     }
 
+
     public boolean alreadySegueix(User u, User s) {
-        for (int i = 0; i < s.getFollowsList().size(); i++) {
-            if (s.getFollowsList().get(i).getIdUser() == u.getId()) return true;
+        for(int i = 0; i < s.getFollows().size(); i++) {
+            if (s.getFollows().get(i).getIdUser() == u.getId()) return true;
         }
         return false;
     }
+
+
+    private int dfs(){
+        return 0;
+    }
+
+
+
+
+
+
+
+
+
+
 
 }

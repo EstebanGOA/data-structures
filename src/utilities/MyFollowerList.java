@@ -1,4 +1,6 @@
-package entities;
+package utilities;
+
+import entities.Follow;
 
 import java.util.Arrays;
 
@@ -55,11 +57,11 @@ public class MyFollowerList {
      * @param desiredCapacity tamaño hasta el que incrementaremos el Array.
      */
     private Follow[] grow(int desiredCapacity) {
-        Follow[] f_aux = new Follow[desiredCapacity];
+        Follow[] aFollows = new Follow[desiredCapacity];
         for (int i = 0; i < follows.length; i++) {
-            f_aux[i] = follows[i];
+            aFollows[i] = follows[i];
         }
-        return follows = f_aux;
+        return follows = aFollows;
     }
 
     /**
