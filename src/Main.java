@@ -2,6 +2,8 @@ import entities.Algorithm;
 import entities.Menu;
 import entities.User;
 
+import java.util.ArrayList;
+
 public class Main {
     public static void main(String[] args) {
 
@@ -33,14 +35,16 @@ public class Main {
 
 
          entities.UserReader userReader = new entities.UserReader();
-        User[] users = userReader.readFile("data/graphS.paed");
+        User[] users = userReader.readFile("data/graphXS.paed");
 
         Algorithm algorithm = new Algorithm();
 
 
-        User u = algorithm.binarySearch(users, 124, 0, users.length);
-        System.out.println(u.getName());
+        int i = algorithm.binSearch(users, 2, 0, users.length);
+        System.out.println(i);
+
         */
+
 
 
     }

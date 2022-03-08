@@ -104,9 +104,9 @@ public class ArrayList<E> {
     public void remove(Object o) {
         Object[] auxiliar = new Object[size-1];
         int index = 0;
-        for (Object item : items) {
-            if (!item.equals(o)) {
-                auxiliar[index] = item;
+        for (int i = 0; i < size; i++) {
+            if (!items[i].equals(o)) {
+                auxiliar[index] = items[i];
                 index++;
             }
         }

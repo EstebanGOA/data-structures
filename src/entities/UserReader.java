@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class UserReader {
 
-    private final String path = "data/graphL.paed";
+    private final String path = "data/dagXS2.paed";
 
     public User[] readFile() {
 
@@ -33,25 +33,40 @@ public class UserReader {
                 users[i] = user;
             }
 
-            numInteractions = Integer.parseInt(myReader.nextLine());
-            for (int i = 0; i < numInteractions; i++) {
-                String input = myReader.nextLine();
-                String[] inputParse = input.split(";");
-                Follow follow = new Follow(Integer.parseInt(inputParse[1]),
-                        Integer.parseInt(inputParse[2]),
-                        Integer.parseInt(inputParse[3]));
+                numInteractions = Integer.parseInt(myReader.nextLine());
+                for (int i = 0; i < numInteractions; i++) {
+                    String input = myReader.nextLine();
+                    String[] inputParse = input.split(";");
+                    Follow followed = new Follow(Integer.parseInt(inputParse[1]),
+                            Integer.parseInt(inputParse[2]),
+                            Integer.parseInt(inputParse[3]));
+                    Follow follower = new Follow(Integer.parseInt(inputParse[0]),
+                            Integer.parseInt(inputParse[2]),
+                            Integer.parseInt(inputParse[3]));
 
-                for (int j = 0; j < users.length; j++) {
-                    if (Integer.parseInt(inputParse[0]) == users[j].getId()) {
-                        users[j].getFollows().add(follow);
+                    /*
+                        A -> B
+                        We add to A that he follows B on the A user
+                        and also that B is being followed by A in the B user
+                    */
+
+                    for (int j = 0; j < users.length; j++) {
+                        // If to add the interaction to the one who follows the other user
+                        if (Integer.parseInt(inputParse[0]) == users[j].getId()) {
+                            users[j].getFollowed().add(followed);
+                        }
+
+                        // If to add the interaction to the one who is followed by the other user
+                        if (Integer.parseInt(inputParse[1]) == users[j].getId()) {
+                            users[j].getFollows().add(follower);
+                        }
                     }
-                }
 
+                }
+                return users;
+            } catch (FileNotFoundException e) {
+                System.out.println("The file does not exist");
+                return null;
             }
-            return users;
-        } catch (FileNotFoundException e) {
-            System.out.println("The file does not exist");
-            return null;
         }
-    }
 }

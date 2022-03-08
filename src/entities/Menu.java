@@ -1,5 +1,7 @@
 package entities;
 
+import graphs.DramaContext;
+import graphs.FacilitacioNet;
 import graphs.NetworkScan;
 
 import java.util.Scanner;
@@ -8,10 +10,12 @@ public class Menu {
 
     private final Scanner scanner;
     private User[] users;
+    private Node source;
 
     public Menu() {
         this.scanner = new Scanner(System.in);
         this.users = new UserReader().readFile();
+        this.source = new TreeReader().readFile();
     }
 
 
@@ -40,22 +44,26 @@ public class Menu {
     private void executeFirstOption() {
         while (true) {
             followersMenu();
-            String option = askForString("Quina funcionalitat vols executar?");
+            String option = askForString("Quina funcionalitat vols executar? ");
+            System.out.println();
             switch (option) {
                 case "A" -> {
                     NetworkScan nScan = new NetworkScan(users);
-                    Algorithm a = new Algorithm();
-                    User[] users = a.sortByFollows(this.users, 0, this.users.length-1);
-                    nScan.bfs(users, users[0]);
+                    nScan.run();
                 }
                 case "B" -> {
-                    System.out.println("Opción B");
+
+
                 }
                 case "C" -> {
-                    System.out.println("Opción C");
+                    DramaContext dramaC = new DramaContext(users);
+                    dramaC.topoSort();
                 }
                 case "D" -> {
-                    System.out.println("Opción D");
+                    int nodeA = askForInteger("Entra el teu identificador: ");
+                    int nodeB = askForInteger("Entra l'identificador de l'altre usuari: ");
+                    FacilitacioNet facilitacioNet = new FacilitacioNet(users, nodeA, nodeB);
+                    facilitacioNet.dijkstra();
                 }
                 case "E" -> {
                     return ;
