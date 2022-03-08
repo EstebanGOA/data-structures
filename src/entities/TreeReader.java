@@ -14,6 +14,7 @@ public class TreeReader {
         int numAlgorithms;
 
         try {
+
             File archivo = new File(path);
             Scanner myReader = new Scanner(archivo);
 
@@ -23,13 +24,18 @@ public class TreeReader {
             String[] inputParse = input.split(";");
             Node node = new Node(Integer.parseInt(inputParse[0]), inputParse[1], inputParse[2], inputParse[3], Long.parseLong(inputParse[4]));
 
+            TreeAlgorithm tree = new TreeAlgorithm();
+
             for (int i = 0; i < numAlgorithms - 1; i++) {
                 input = myReader.nextLine();
                 inputParse = input.split(";");
                 Node nodeAux = new Node(Integer.parseInt(inputParse[0]), inputParse[1], inputParse[2], inputParse[3], Long.parseLong(inputParse[4]));
                 // insert node
+                tree.insert(node, nodeAux, nodeAux.getTimestamp());
             }
+
             return node;
+
         } catch (FileNotFoundException e) {
             System.out.println("The file does not exist");
             return null;

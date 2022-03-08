@@ -10,10 +10,12 @@ public class Menu {
 
     private final Scanner scanner;
     private User[] users;
+    private Node source;
 
     public Menu() {
         this.scanner = new Scanner(System.in);
         this.users = new UserReader().readFile();
+        this.source = new TreeReader().readFile();
     }
 
 
@@ -56,7 +58,6 @@ public class Menu {
                 case "C" -> {
                     DramaContext dramaC = new DramaContext(users);
                     dramaC.topoSort();
-
                 }
                 case "D" -> {
                     int nodeA = askForInteger("Entra el teu identificador: ");
