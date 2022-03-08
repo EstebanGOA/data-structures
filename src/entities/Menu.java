@@ -3,6 +3,7 @@ package entities;
 import graphs.DramaContext;
 import graphs.FacilitacioNet;
 import graphs.NetworkScan;
+import graphs.Recommendation;
 
 import java.util.Scanner;
 
@@ -40,10 +41,7 @@ public class Menu {
     }
 
     private void executeFirstOption() {
-        Recomendacion r = new Recomendacion();
         while (true) {
-            User[] u = users;
-
             followersMenu();
             String option = askForString("Quina funcionalitat vols executar? ");
             System.out.println();
@@ -53,8 +51,9 @@ public class Menu {
                     nScan.run();
                 }
                 case "B" -> {
-                    int idMeu = askForInteger("Entra el teu identificador: ");
-                    r.rellenarBools(u, idMeu);
+                    int id = askForInteger("Entra el teu identificador: ");
+                    Recommendation rec = new Recommendation();
+                    rec.run(users, id);
                 }
                 case "C" -> {
                     DramaContext dramaC = new DramaContext(users);
