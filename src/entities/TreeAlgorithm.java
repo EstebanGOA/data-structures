@@ -32,4 +32,14 @@ public class TreeAlgorithm {
         }
     }
 
+    public void reverseInorder(Node node) {
+        if (node.getRight() != null) {
+            inorder(node.getRight());
+        }
+        System.out.println(node.getTimestamp());
+        if (node.getLeft() != null) {
+            inorder(node.getLeft());
+        }
+    }
+
 }
