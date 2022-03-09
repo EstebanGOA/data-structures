@@ -5,8 +5,6 @@ import entities.Follow;
 import entities.RecommendedUser;
 import entities.User;
 import utilities.ArrayList;
-import utilities.MyQueue;
-
 import java.util.Objects;
 
 /**
