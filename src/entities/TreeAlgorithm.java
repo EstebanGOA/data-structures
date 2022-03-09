@@ -22,24 +22,4 @@ public class TreeAlgorithm {
 
     }
 
-    public void inorder(Node node) {
-        if (node.getLeft() != null) {
-            inorder(node.getLeft());
-        }
-        System.out.println(node.getTimestamp());
-        if (node.getRight() != null) {
-            inorder(node.getRight());
-        }
-    }
-
-    public void reverseInorder(Node node) {
-        if (node.getRight() != null) {
-            inorder(node.getRight());
-        }
-        System.out.println(node.getTimestamp());
-        if (node.getLeft() != null) {
-            inorder(node.getLeft());
-        }
-    }
-
 }

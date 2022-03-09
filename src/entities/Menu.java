@@ -3,6 +3,7 @@ package entities;
 import graphs.DramaContext;
 import graphs.FacilitacioNet;
 import graphs.NetworkScan;
+import trees.Feed;
 
 import java.util.Scanner;
 
@@ -56,7 +57,8 @@ public class Menu {
                     // Eliminar algoritmo
                 }
                 case "C" -> {
-                    // Listar algoritmos
+                    Feed feed = new Feed(source);
+                    feed.run();
                 }
                 case "D" -> {
                     // Buscar por timestamp (exacto)
@@ -121,7 +123,7 @@ public class Menu {
         System.out.println("\tC. Llistar algorismes");
         System.out.println("\tD. Cerca per timestamp (exacta)");
         System.out.println("\tE. Cerca per timestamp (reng)");
-        System.out.println("\n\tF. Tornar entere");
+        System.out.println("\n\tF. Tornar entere\n");
         return askForString("Quina funcionalitat vols executar? ");
     }
 
