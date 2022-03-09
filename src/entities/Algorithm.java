@@ -1,7 +1,7 @@
 package entities;
 
 import entities.User;
-// TODO Cuidado si pones un ID que no existe peta!!
+// TODO: Si introducimos un 'id' que no existe saltará una excepción.
 
 public class Algorithm {
 
