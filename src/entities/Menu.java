@@ -137,7 +137,7 @@ public class Menu {
     private void mainMenu() {
         System.out.println("\n.* LinkedTree *.\n");
         System.out.println("1. Seguidors (Grafs)");
-        System.out.println("2. A ESPECIFICAR");
+        System.out.println("2. Feed (Arbres)");
         System.out.println("3. A ESPECIFICAR");
         System.out.println("4. A ESPECIFICAR\n");
         System.out.println("5. Sortir\n");
