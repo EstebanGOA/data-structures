@@ -13,6 +13,7 @@ public class User {
     private final String[] interests;
     private boolean visited;
     private ArrayList<Follow> follows;
+    private ArrayList<Follow> followed;
 
     public User(int id, String name, String alias, String[] interests) {
         this.id = id;
@@ -21,10 +22,15 @@ public class User {
         this.interests = interests;
         this.visited = false;
         this.follows = new ArrayList<Follow>();
+        this.followed = new ArrayList<>();
     }
 
     public void setFollows(ArrayList<Follow> follows) {
         this.follows = follows;
+    }
+
+    public ArrayList<Follow> getFollowed() {
+        return followed;
     }
 
     public ArrayList<Follow> getFollows() {
@@ -54,6 +60,8 @@ public class User {
     public void setVisited(boolean visited) {
         this.visited = visited;
     }
+
+
 
     @Override
     public String toString() {

@@ -1,5 +1,7 @@
 package entities;
 
+import graphs.DramaContext;
+import graphs.FacilitacioNet;
 import graphs.NetworkScan;
 
 import java.util.Scanner;
@@ -8,10 +10,12 @@ public class Menu {
 
     private final Scanner scanner;
     private User[] users;
+    private Node source;
 
     public Menu() {
         this.scanner = new Scanner(System.in);
         this.users = new UserReader().readFile();
+        this.source = new TreeReader().readFile();
     }
 
 
@@ -25,6 +29,9 @@ public class Menu {
                 case 1 -> {
                     executeFirstOption();
                 }
+                case 2 -> {
+                    executeSecondOption();
+                }
                 case 5 -> {
                     exit = true;
                     System.out.println("\nAturant LinkedTree...");
@@ -37,10 +44,36 @@ public class Menu {
         }
     }
 
+    private void executeSecondOption() {
+        while (true) {
+            String option = treesMenu();
+            System.out.println();
+            switch(option) {
+                case "A" -> {
+                    // Añadir algoritmo
+                }
+                case "B" -> {
+                    // Eliminar algoritmo
+                }
+                case "C" -> {
+                    // Listar algoritmos
+                }
+                case "D" -> {
+                    // Buscar por timestamp (exacto)
+                }
+                case "E" -> {
+                    // Buscar por timestamp (rango)
+                }
+                case "F" -> {
+                    return ;
+                }
+            }
+        }
+    }
+
     private void executeFirstOption() {
         while (true) {
-            followersMenu();
-            String option = askForString("Quina funcionalitat vols executar? ");
+            String option = followersMenu();
             System.out.println();
             switch (option) {
                 case "A" -> {
@@ -48,13 +81,18 @@ public class Menu {
                     nScan.run();
                 }
                 case "B" -> {
-                    System.out.println("Opción B");
+
+
                 }
                 case "C" -> {
-                    System.out.println("Opción C");
+                    DramaContext dramaC = new DramaContext(users);
+                    dramaC.topoSort();
                 }
                 case "D" -> {
-                    System.out.println("Opción D");
+                    int nodeA = askForInteger("Entra el teu identificador: ");
+                    int nodeB = askForInteger("Entra l'identificador de l'altre usuari: ");
+                    FacilitacioNet facilitacioNet = new FacilitacioNet(users, nodeA, nodeB);
+                    facilitacioNet.dijkstra();
                 }
                 case "E" -> {
                     return ;
@@ -77,12 +115,23 @@ public class Menu {
         }
     }
 
-    private void followersMenu() {
+    private String treesMenu() {
+        System.out.println("\n\tA. Afegir algorisme");
+        System.out.println("\tB. Eliminar algorisme");
+        System.out.println("\tC. Llistar algorismes");
+        System.out.println("\tD. Cerca per timestamp (exacta)");
+        System.out.println("\tE. Cerca per timestamp (reng)");
+        System.out.println("\n\tF. Tornar entere");
+        return askForString("Quina funcionalitat vols executar? ");
+    }
+
+    private String followersMenu() {
         System.out.println("\n\tA. Explorar la xarxa.");
         System.out.println("\tB. Recomanar usuaris");
         System.out.println("\tC. Contextualizar drama");
         System.out.println("\tD. Networking");
         System.out.println("\n\tE. Tornar enrere\n");
+         return askForString("Quina funcionalitat vols executar? ");
     }
 
     private void mainMenu() {
