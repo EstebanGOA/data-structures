@@ -46,6 +46,8 @@ public class Menu {
     }
 
     private void executeSecondOption() {
+        FuncionalitatsCerca f = new FuncionalitatsCerca();
+
         while (true) {
             String option = treesMenu();
             System.out.println();
@@ -60,10 +62,25 @@ public class Menu {
                     // Listar algoritmos
                 }
                 case "D" -> {
+                    long numD=0;
                     // Buscar por timestamp (exacto)
+                    System.out.println("\nTimestamp a cercar: ");
+                    numD=scanner.nextLong();
+                    f.cercaExacta(numD, source);
                 }
                 case "E" -> {
                     // Buscar por timestamp (rango)
+                    long numMin=0, numMAX=0;
+                    do{
+                        System.out.println("Timestamp mínim a cercar: ");
+                        numMin=scanner.nextLong();
+                        System.out.println("Timestamp màxim a cercar: ");
+                        numMAX=scanner.nextLong();
+                        if(numMAX<numMin)
+                            System.out.println("ERROR; El 1r timestamp te que ser menor que el 2n");
+                    }while(numMAX<numMin);
+
+                    f.cercaRang(numMin, numMAX, source);
                 }
                 case "F" -> {
                     return ;
