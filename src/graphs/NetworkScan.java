@@ -24,8 +24,7 @@ public class NetworkScan {
     public void run() {
 
         User[] users = a.sortByFollows(this.users.clone(), 0, this.users.length-1);
-        System.out.println("L'usuari que segueix més comptes és: \n");
-        System.out.println(users[0].toString());
+        System.out.println("L'usuari que segueix més comptes és: \n\n" + users[0].toString());
         bfs(users, users[0]);
 
         for (User u : users) {
@@ -47,7 +46,7 @@ public class NetworkScan {
 
             User u = queue.get();
             queue.remove();
-            ArrayList<User> adjacents = getUserFollows(u);
+            ArrayList<User> adjacents = getFollows(u);
 
             if (!adjacents.isEmpty())
                 System.out.println("Aquests són els comptes que segueix al usuari " + u.getId() + " : \n");
@@ -73,7 +72,7 @@ public class NetworkScan {
      * @param user nodo/usuario actual.
      * @return cola con los nodos/usuarios adyacentes del nodo/usuario actual.
      */
-    private ArrayList<User> getUserFollows(User user) {
+    private ArrayList<User> getFollows(User user) {
 
         ArrayList<Follow> follows = user.getFollows();
         ArrayList<User> adjacents = new ArrayList<>();

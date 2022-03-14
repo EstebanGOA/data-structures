@@ -11,18 +11,37 @@ public class User {
     private final String name;
     private final String alias;
     private final String[] interests;
-    private boolean visited;
     private ArrayList<Follow> follows;
     private ArrayList<Follow> followed;
+
+    /**
+     * Variables utilizadas para la aplicación de los diferentes algoritmos.
+     */
+    private boolean visited;
+    private double points;
 
     public User(int id, String name, String alias, String[] interests) {
         this.id = id;
         this.name = name;
         this.alias = alias;
         this.interests = interests;
-        this.visited = false;
         this.follows = new ArrayList<Follow>();
         this.followed = new ArrayList<>();
+        this.visited = false;
+        this.points = 0;
+    }
+
+    /**
+     * Incrementará la puntuación del usuario para el sistema de recomendación.
+     * @param decimal Si es true significa que estamos incrementando de forma decimal y, por tanto, incrementaremos únicamente 0.1 el valor actual,
+     *                en caso de ser false, incrementaremos en 1 punto el valor actual.
+     */
+    public void increment(boolean decimal) {
+        if (decimal) {
+            points += 0.1;
+        } else {
+            points++;
+        }
     }
 
     public void setFollows(ArrayList<Follow> follows) {
@@ -61,7 +80,13 @@ public class User {
         this.visited = visited;
     }
 
+    public double getPoints() {
+        return points;
+    }
 
+    public void setPoints(double points) {
+        this.points = points;
+    }
 
     @Override
     public String toString() {
@@ -76,4 +101,5 @@ public class User {
         }
         return string.append("\n").toString();
     }
+
 }

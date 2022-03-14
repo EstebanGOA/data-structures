@@ -4,6 +4,7 @@ import graphs.DramaContext;
 import graphs.FacilitacioNet;
 import graphs.NetworkScan;
 import trees.Feed;
+import graphs.Recommendation;
 
 import java.util.Scanner;
 
@@ -83,8 +84,9 @@ public class Menu {
                     nScan.run();
                 }
                 case "B" -> {
-
-
+                    int id = askForInteger("Entra el teu identificador: ");
+                    Recommendation rec = new Recommendation();
+                    rec.run(users, id);
                 }
                 case "C" -> {
                     DramaContext dramaC = new DramaContext(users);
