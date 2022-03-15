@@ -50,7 +50,15 @@ public class Menu {
             System.out.println();
             switch(option) {
                 case "A" -> {
-                    // Añadir algoritmo
+                    int id = askForInteger("Identificador de l'algorisme: ");
+                    String name = askForString("Nom de l'algorisme: ");
+                    String language = askForString("Llenguatge de l'algorisme: ");
+                    String cost = askForString("Cost de l'algorisme: ");
+                    long timestamp = (long) askForInteger("Timestamp de l'algorisme: ");
+                    Node node = new Node(id, name, language, cost, timestamp);
+                    TreeAlgorithm treeAlgorithm = new TreeAlgorithm();
+                    treeAlgorithm.insert(source, node);
+                    System.out.println("\nL'algorisme ha estat correctament afegit al feed.");
                 }
                 case "B" -> {
                     // Eliminar algoritmo
