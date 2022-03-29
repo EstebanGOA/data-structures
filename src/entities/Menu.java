@@ -64,18 +64,15 @@ public class Menu {
                 case "D" -> {
                     long numD=0;
                     // Buscar por timestamp (exacto)
-                    System.out.println("\nTimestamp a cercar: ");
-                    numD=scanner.nextLong();
+                    numD = askForLong("\nTimestamp a cercar: ");
                     f.cercaExacta(numD, source);
                 }
                 case "E" -> {
                     // Buscar por timestamp (rango)
                     long numMin=0, numMAX=0;
                     do{
-                        System.out.println("Timestamp mínim a cercar: ");
-                        numMin=scanner.nextLong();
-                        System.out.println("Timestamp màxim a cercar: ");
-                        numMAX=scanner.nextLong();
+                        numMin = askForLong("Timestamp mínim a cercar: ");
+                        numMAX = askForLong("Timestamp màxim a cercar: ");
                         if(numMAX<numMin)
                             System.out.println("ERROR; El 1r timestamp te que ser menor que el 2n");
                     }while(numMAX<numMin);
@@ -129,6 +126,15 @@ public class Menu {
         try {
             System.out.print(msg);
             return Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            return -1;
+        }
+    }
+
+    private long askForLong(String msg) {
+        try {
+            System.out.print(msg);
+            return Long.parseLong(scanner.nextLine());
         } catch (NumberFormatException e) {
             return -1;
         }

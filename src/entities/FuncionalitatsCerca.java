@@ -19,37 +19,26 @@ public class FuncionalitatsCerca {
      * coge el nodo derecho y lo pongo em el nodo que miro, sino coge el izquierdo.
      * Si por algun caso me da exception, eso es que no hay menor/mayor, significa que no existe
      * @param num   numero exacto que tengo que buscar
-     * @param source nodo inicial, de donde cuelgan todos los otros
+     * @param node nodo inicial, de donde cuelgan todos los otros
      */
-    public void cercaExacta(long num, Node source){
-        int found =0;   // 0 es q encara no l'ha trobat, 1 es que si l'ha trobat, 2 es que no hi es
-        Node n;
-        n=source;
-        while(found ==0){
-            if(num == n.getTimestamp()){
-                found=1;
-                System.out.println("\nS'ha trobat un algorisme... " + n.getName() + ": " + n.getId() + ", " + n.getCost());
-            }
-            else{
-                if(num > n.getTimestamp()){
-                    try{
-                        n = n.getRight();
-                    }catch (Exception e){
-                        found=2;
-                    }
-                }
-                else{
-                    try{
-                        n = n.getLeft();
-                    }catch ( Exception e){
-                        found=2;
-                    }
-                }
-            }
-        }
-        if(found==2){
+    public void cercaExacta(long num, Node node){
+
+        if (node == null) {
             System.out.println("No existeix un algorisme amb un timestamp de " + num);
+            return;
         }
+
+        if(num == node.getTimestamp()) {
+            System.out.println("\nS'ha trobat un algorisme... " + node.getName() + ": " + node.getId() + ", " + node.getCost());
+        } else {
+            if(num > node.getTimestamp()) {
+                cercaExacta(num, node.getRight());
+            } else {
+                cercaExacta(num, node.getLeft());
+            }
+        }
+
+
     }
 
     public void cercaRang(long numMin, long numMax, Node source) {
@@ -60,25 +49,21 @@ public class FuncionalitatsCerca {
 
             System.out.println("S'han trobat " + printer.size() + " algorismes en aquest rang...\n");
             for(int i=0;i<printer.size();i++) {
+              //  System.out.println("\t" + printer.get(i).getName() + ": " + printer.get(i).getLanguage() + ", " + printer.get(i).getCost() + " - " + printer.get(i).getTimestamp());
                 System.out.println("\t" + printer.get(i).getName() + ": " + printer.get(i).getLanguage() + ", " + printer.get(i).getCost() + " - " + printer.get(i).getTimestampDate());
             }
 
-        }else {
+        } else {
             System.out.println("No existeix un algorisme amb un timestamp entre " + numMin + " i " + numMax);
         }
 
     }
 
-    private void trobat(long numMin, long numMax, Node source) {
-
-        if(source == null) {
-            return;
-        }
+    private void trobat(long numMin, long numMax, Node source) {    // preorder
 
         if(source.getTimestamp() >= numMin) {
             if(source.getLeft() != null) {
-                source = source.getLeft();
-                trobat(numMin, numMax, source);
+                trobat(numMin, numMax, source.getLeft());
             }
         }
 
@@ -88,8 +73,7 @@ public class FuncionalitatsCerca {
 
         if(source.getTimestamp() <= numMax){
             if(source.getRight() != null) {
-                source = source.getRight();
-                trobat(numMin, numMax, source);
+                trobat(numMin, numMax, source.getRight());
             }
         }
 
