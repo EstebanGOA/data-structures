@@ -1,4 +1,7 @@
-package entities;
+package io;
+
+import entities.Follow;
+import entities.User;
 
 import java.io.File;
 import java.io.FileNotFoundException;

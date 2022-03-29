@@ -1,5 +1,8 @@
 package entities;
 
+/**
+ *
+ */
 public class Node {
 
     private int id;
@@ -14,6 +17,8 @@ public class Node {
     private Node parent;
     private Node right;
     private Node left;
+    private int height;
+    private int balance;
 
     public Node(int id, String name, String language, String cost, long timestamp) {
         this.id = id;
@@ -88,5 +93,21 @@ public class Node {
 
     public void setLeft(Node left) {
         this.left = left;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public void updateHeight(int value) {
+        height += value;
+    }
+
+    public void updateBalance(int value) {
+        balance += value;
     }
 }
