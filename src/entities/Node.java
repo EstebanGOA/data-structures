@@ -7,6 +7,8 @@ public class Node {
     private String language;
     private String cost;
     private long timestamp;
+    private int fb;
+
 
     /**
      * Binary Search Tree variables
@@ -24,6 +26,7 @@ public class Node {
         this.parent = null;
         this.right = null;
         this.left = null;
+        fb = 0;
     }
 
     public int getId() {
@@ -88,5 +91,12 @@ public class Node {
 
     public void setLeft(Node left) {
         this.left = left;
+    }
+
+    public int getFb() {
+        return fb;
+    }
+    public void updateFb(int i) {
+        fb += i;
     }
 }
