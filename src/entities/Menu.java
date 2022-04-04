@@ -3,6 +3,7 @@ package entities;
 import graphs.DramaContext;
 import graphs.FacilitacioNet;
 import graphs.NetworkScan;
+import trees.Deletion;
 import trees.Feed;
 import graphs.Recommendation;
 
@@ -55,7 +56,10 @@ public class Menu {
                     // Añadir algoritmo
                 }
                 case "B" -> {
-                    // Eliminar algoritmo
+                    int id = askForInteger("Identificador de l'algorisme: ");
+                    Deletion deletion = new Deletion();
+                    deletion.findById(source, id, false);
+
                 }
                 case "C" -> {
                     Feed feed = new Feed(source);
