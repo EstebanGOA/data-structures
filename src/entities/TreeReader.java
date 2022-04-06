@@ -31,7 +31,7 @@ public class TreeReader {
                 inputParse = input.split(";");
                 Node nodeAux = new Node(Integer.parseInt(inputParse[0]), inputParse[1], inputParse[2], inputParse[3], Long.parseLong(inputParse[4]));
                 // insert node
-                tree.insert(node, nodeAux, nodeAux.getTimestamp());
+                tree.insert(node, nodeAux);
             }
 
             return node;
