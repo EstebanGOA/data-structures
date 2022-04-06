@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class TreeReader {
 
-    private final String path = "data/treeXS.paed";
+    private final String path = "data/treeXXS.paed";
 
     public Node readFile() {
 

@@ -3,6 +3,7 @@ package entities;
 import graphs.DramaContext;
 import graphs.FacilitacioNet;
 import graphs.NetworkScan;
+import graphs.Recommendation;
 import trees.Feed;
 
 import java.util.Scanner;
@@ -46,6 +47,8 @@ public class Menu {
     }
 
     private void executeSecondOption() {
+        FuncionalitatsCerca f = new FuncionalitatsCerca();
+
         while (true) {
             String option = treesMenu();
             System.out.println();
@@ -69,10 +72,22 @@ public class Menu {
                     feed.run();
                 }
                 case "D" -> {
+                    long numD=0;
                     // Buscar por timestamp (exacto)
+                    numD = askForLong("\nTimestamp a cercar: ");
+                    f.cercaExacta(numD, source);
                 }
                 case "E" -> {
                     // Buscar por timestamp (rango)
+                    long numMin=0, numMAX=0;
+                    do{
+                        numMin = askForLong("Timestamp mínim a cercar: ");
+                        numMAX = askForLong("Timestamp màxim a cercar: ");
+                        if(numMAX<numMin)
+                            System.out.println("ERROR; El 1r timestamp te que ser menor que el 2n");
+                    }while(numMAX<numMin);
+
+                    f.cercaRang(numMin, numMAX, source);
                 }
                 case "F" -> {
                     return ;
@@ -91,8 +106,9 @@ public class Menu {
                     nScan.run();
                 }
                 case "B" -> {
-
-
+                    int id = askForInteger("Entra el teu identificador: ");
+                    Recommendation rec = new Recommendation();
+                    rec.run(users, id);
                 }
                 case "C" -> {
                     DramaContext dramaC = new DramaContext(users);
@@ -120,6 +136,15 @@ public class Menu {
         try {
             System.out.print(msg);
             return Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            return -1;
+        }
+    }
+
+    private long askForLong(String msg) {
+        try {
+            System.out.print(msg);
+            return Long.parseLong(scanner.nextLine());
         } catch (NumberFormatException e) {
             return -1;
         }

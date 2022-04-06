@@ -1,5 +1,10 @@
 package entities;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.util.Date;
+
 public class Node {
 
     private int id;
@@ -89,4 +94,21 @@ public class Node {
     public void setLeft(Node left) {
         this.left = left;
     }
+
+    public String getTimestampDate(){
+        // dd/mm/yy hh/mm/ss
+        /*
+        long YY, MM, DD, hh, mm, ss;
+        ss = timestamp % 60;
+        mm = (timestamp/60) % 60;
+        DD = (timestamp / 3600) % 24;
+        YY = (timestamp % 31556926) + 1971;     // year + 1970 que es cuando comienza el unix
+        MM = (timestamp % 2629743) % 12;        // month %12 pq el año tiene 12 meses
+        */
+        DateFormat df = new SimpleDateFormat("dd/mm/yyyy hh:mm:ss");
+        return df.format(Date.from(Instant.ofEpochSecond(this.timestamp)));
+    }
+
+
+
 }
