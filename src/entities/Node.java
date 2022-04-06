@@ -14,7 +14,6 @@ public class Node {
     /**
      * Binary Search Tree variables
      */
-    private Node parent;
     private Node right;
     private Node left;
     private int height;
@@ -26,7 +25,6 @@ public class Node {
         this.language = language;
         this.cost = cost;
         this.timestamp = timestamp;
-        this.parent = null;
         this.right = null;
         this.left = null;
     }
@@ -71,14 +69,6 @@ public class Node {
         this.timestamp = timestamp;
     }
 
-    public Node getParent() {
-        return parent;
-    }
-
-    public void setParent(Node parent) {
-        this.parent = parent;
-    }
-
     public Node getRight() {
         return right;
     }
@@ -103,11 +93,4 @@ public class Node {
         this.height = height;
     }
 
-    public void updateHeight(int value) {
-        height += value;
-    }
-
-    public void updateBalance(int value) {
-        balance += value;
-    }
 }

@@ -1,6 +1,7 @@
 package trees;
 
 import entities.Node;
+import entities.Tree;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -20,7 +21,7 @@ public class Feed {
 
     /**
      * Constructor de Feed.
-     * @param source Nodo raíz del árbol.
+     * @param source Objeto donde está almacenado el árbol.
      */
     public Feed(Node source) {
         this.source = source;
@@ -39,7 +40,7 @@ public class Feed {
         if (node.getRight() != null) {
             reverseInorder(node.getRight());
         }
-        System.out.println(node.getName() + ": " + node.getLanguage() + ", " + node.getCost() + " - " + dFormatter.format(Date.from(Instant.ofEpochSecond(node.getTimestamp()))));
+        System.out.println(node.getName() + ": " + node.getLanguage() + ", " + node.getCost() + " - " + node.getTimestamp());
         if (node.getLeft() != null) {
             reverseInorder(node.getLeft());
         }

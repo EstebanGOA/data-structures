@@ -1,7 +1,7 @@
 package io;
 
 import entities.Node;
-import entities.TreeAlgorithm;
+import entities.Tree;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -10,8 +10,15 @@ import java.util.Scanner;
 
 public class TreeReader {
 
+    /**
+     * Ruta relativa de la ubicación del fichero.
+     */
     private final String path = "data/trees/treeXXS.paed";
 
+    /**
+     * Cargará el fichero y creará la estructura del árbol.
+     * @return Nodo raíz del árbol.
+     */
     public Node readFile() {
 
         int numAlgorithms;
@@ -25,16 +32,16 @@ public class TreeReader {
 
             String input = myReader.nextLine();
             String[] inputParse = input.split(";");
-            Node node = new Node(Integer.parseInt(inputParse[0]), inputParse[1], inputParse[2], inputParse[3], Long.parseLong(inputParse[4]));
 
-            TreeAlgorithm tree = new TreeAlgorithm();
+            Node node = new Node(Integer.parseInt(inputParse[0]), inputParse[1], inputParse[2], inputParse[3], Long.parseLong(inputParse[4]));
+            Tree tree = new Tree();
 
             for (int i = 0; i < numAlgorithms - 1; i++) {
                 input = myReader.nextLine();
                 inputParse = input.split(";");
                 Node nodeAux = new Node(Integer.parseInt(inputParse[0]), inputParse[1], inputParse[2], inputParse[3], Long.parseLong(inputParse[4]));
                 // insert node
-                tree.insert(node, nodeAux);
+                node = tree.insertAVL(node, nodeAux);
             }
 
             return node;
