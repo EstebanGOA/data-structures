@@ -8,13 +8,13 @@ public class Tree {
      * @param parent Nodo antecesor del nodo actual.
      * @param node Nodo actual en el que nos encontramos.
      */
-    public void insert(Node parent, Node node) {
+    public Node insert(Node parent, Node node) {
 
         if (parent.getTimestamp() > node.getTimestamp()) {
             if (parent.getLeft() == null) {
                 parent.setLeft(node);
             } else {
-                insert(parent.getLeft(), node);
+                parent.setLeft(insert(parent.getLeft(), node));
             }
         }
 
@@ -22,9 +22,11 @@ public class Tree {
             if (parent.getRight() == null) {
                 parent.setRight(node);
             } else {
-                insert(parent.getRight(), node);
+                parent.setRight(insert(parent.getRight(), node));
             }
         }
+
+        return parent;
 
     }
 
@@ -61,7 +63,7 @@ public class Tree {
      * @param parent Nodo al que calculamos el factor de balance.
      * @return Nodo raíz después de realizar o no la rotación.
      */
-    private Node autobalance(Node parent) {
+    public Node autobalance(Node parent) {
 
         int balance = getBalance(parent);
 
@@ -91,7 +93,7 @@ public class Tree {
      * @param node Nodo raíz.
      * @return Valor del balance del nodo.
      */
-    public int getBalance(Node node) {
+    private int getBalance(Node node) {
         return height(node.getRight()) - height(node.getLeft());
     }
 
@@ -100,7 +102,7 @@ public class Tree {
      * @param node Nodo actual.
      * @return Altura del nodo.
      */
-    public int height(Node node) {
+    private int height(Node node) {
         if (node == null) {
             return 0;
         }
@@ -115,7 +117,7 @@ public class Tree {
      * @param Y Nodo raíz donde comienza la rotación
      * @return Nuevo nodo raíz después de realizar la rotación
      */
-    public Node rightRotate(Node Y) {
+    private Node rightRotate(Node Y) {
         Node X = Y.getLeft();
         Node T2 = X.getRight();
 
@@ -136,7 +138,7 @@ public class Tree {
      * @param X Nodo raíz donde comienza la rotación
      * @return Nuevo nodo raíz después de realizar la rotación
      */
-    public Node leftRotate(Node X) {
+    private Node leftRotate(Node X) {
         Node Y = X.getRight();
         Node T2 = Y.getLeft();
 
