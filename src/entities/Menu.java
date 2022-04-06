@@ -3,8 +3,12 @@ package entities;
 import graphs.DramaContext;
 import graphs.FacilitacioNet;
 import graphs.NetworkScan;
+import io.TreeReader;
+import io.UserReader;
+import trees.TreeDelete;
 import graphs.Recommendation;
 import trees.Feed;
+import trees.TreeSearchNode;
 
 import java.util.Scanner;
 
@@ -47,7 +51,6 @@ public class Menu {
     }
 
     private void executeSecondOption() {
-        FuncionalitatsCerca f = new FuncionalitatsCerca();
 
         while (true) {
             String option = treesMenu();
@@ -58,36 +61,34 @@ public class Menu {
                     String name = askForString("Nom de l'algorisme: ");
                     String language = askForString("Llenguatge de l'algorisme: ");
                     String cost = askForString("Cost de l'algorisme: ");
-                    long timestamp = (long) askForInteger("Timestamp de l'algorisme: ");
+                    long timestamp = askForLong("Timestamp de l'algorisme: ");
                     Node node = new Node(id, name, language, cost, timestamp);
-                    TreeAlgorithm treeAlgorithm = new TreeAlgorithm();
-                    treeAlgorithm.insert(source, node);
+                    Tree tree = new Tree();
+                    /*
+                    TODO: Si cambiamos de tipo de árbol (autobalanceado o no) tenemos que cambiar esta línea.
+                     */
+                    tree.insert(source, node);
                     System.out.println("\nL'algorisme ha estat correctament afegit al feed.");
                 }
                 case "B" -> {
-                    // Eliminar algoritmo
+                    int id = askForInteger("Identificador de l'algorisme: ");
+                    TreeDelete treeDelete = new TreeDelete(source);
+                    source = treeDelete.run(source, id);
                 }
                 case "C" -> {
                     Feed feed = new Feed(source);
                     feed.run();
                 }
                 case "D" -> {
-                    long numD=0;
-                    // Buscar por timestamp (exacto)
-                    numD = askForLong("\nTimestamp a cercar: ");
-                    f.cercaExacta(numD, source);
+                    TreeSearchNode treeSearchNode = new TreeSearchNode();
+                    long number = askForLong("\nTimestamp a cercar: ");
+                    treeSearchNode.findByTimestamp(source, number);
                 }
                 case "E" -> {
-                    // Buscar por timestamp (rango)
-                    long numMin=0, numMAX=0;
-                    do{
-                        numMin = askForLong("Timestamp mínim a cercar: ");
-                        numMAX = askForLong("Timestamp màxim a cercar: ");
-                        if(numMAX<numMin)
-                            System.out.println("ERROR; El 1r timestamp te que ser menor que el 2n");
-                    }while(numMAX<numMin);
-
-                    f.cercaRang(numMin, numMAX, source);
+                    TreeSearchNode treeSearchNode = new TreeSearchNode();
+                    long lowerTimestamp = askForLong("Timestamp mínim a cercar: ");
+                    long higherTimestamp = askForLong("Timestamp màxim a cercar: ");
+                    treeSearchNode.findByRange(source, lowerTimestamp, higherTimestamp);
                 }
                 case "F" -> {
                     return ;

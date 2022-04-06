@@ -1,4 +1,7 @@
-package entities;
+package io;
+
+import entities.Follow;
+import entities.User;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -6,7 +9,7 @@ import java.util.Scanner;
 
 public class UserReader {
 
-    private final String path = "data/graphXS.paed";
+    private final String path = "data/graphs/graphXS.paed";
 
     public User[] readFile() {
 
@@ -35,11 +38,14 @@ public class UserReader {
 
                 numInteractions = Integer.parseInt(myReader.nextLine());
                 for (int i = 0; i < numInteractions; i++) {
+
                     String input = myReader.nextLine();
                     String[] inputParse = input.split(";");
+
                     Follow followed = new Follow(Integer.parseInt(inputParse[1]),
                             Integer.parseInt(inputParse[2]),
                             Integer.parseInt(inputParse[3]));
+
                     Follow follower = new Follow(Integer.parseInt(inputParse[0]),
                             Integer.parseInt(inputParse[2]),
                             Integer.parseInt(inputParse[3]));

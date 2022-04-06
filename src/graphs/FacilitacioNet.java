@@ -12,18 +12,17 @@ import java.util.Arrays;
 public class FacilitacioNet {
 
     private User[] users;
-    private Algorithm a = new Algorithm();
+    private Algorithm a;
     private int nodeInical;
     private int nodeFinal;
     private int[] d;
 
-
-    public FacilitacioNet(User[] users, int nodeInical, int nodeFinal) {
+    public FacilitacioNet(User[] users, int nodeInical, int nodeFinal){
         this.users = Arrays.copyOf(users, users.length);
-        this.nodeInical = a.binSearch(this.users, nodeInical, 0, users.length);
-        this.nodeFinal = a.binSearch(this.users, nodeFinal, 0, users.length);
+        a = new Algorithm();
+        this.nodeInical = a.binSearch(this.users, nodeInical, 0 , users.length);
+        this.nodeFinal = a.binSearch(this.users, nodeFinal, 0 , users.length);
         d = new int[users.length];
-
     }
 
     public void dijkstra() {

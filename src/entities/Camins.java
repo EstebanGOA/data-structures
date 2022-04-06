@@ -3,8 +3,8 @@ package entities;
 import utilities.ArrayList;
 
 public class Camins {
-    private ArrayList<User> cami;
 
+    private ArrayList<User> cami;
 
     public Camins(){
         cami = new ArrayList<>();
@@ -25,4 +25,5 @@ public class Camins {
     public void add(User u){
         cami.add(u);
     }
+
 }

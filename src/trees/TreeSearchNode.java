@@ -1,16 +1,14 @@
-package entities;
+package trees;
 
-import utilities.MyQueue;
+import entities.Node;
 
 import utilities.ArrayList;
-import java.util.Date;
-import java.util.Random;
 
-public class FuncionalitatsCerca {
+public class TreeSearchNode {
 
     private ArrayList<Node> printer;
 
-    public FuncionalitatsCerca() {
+    public TreeSearchNode() {
         printer = new ArrayList<>();
     }
 
@@ -21,29 +19,28 @@ public class FuncionalitatsCerca {
      * @param num   numero exacto que tengo que buscar
      * @param node nodo inicial, de donde cuelgan todos los otros
      */
-    public void cercaExacta(long num, Node node){
+    public void findByTimestamp(Node node, long timestamp){
 
         if (node == null) {
-            System.out.println("No existeix un algorisme amb un timestamp de " + num);
+            System.out.println("No existeix un algorisme amb un timestamp de " + timestamp);
             return;
         }
 
-        if(num == node.getTimestamp()) {
+        if(timestamp == node.getTimestamp()) {
             System.out.println("\nS'ha trobat un algorisme... " + node.getName() + ": " + node.getId() + ", " + node.getCost());
         } else {
-            if(num > node.getTimestamp()) {
-                cercaExacta(num, node.getRight());
+            if(timestamp > node.getTimestamp()) {
+                findByTimestamp(node.getRight(), timestamp);
             } else {
-                cercaExacta(num, node.getLeft());
+                findByTimestamp(node.getLeft(), timestamp);
             }
         }
 
-
     }
 
-    public void cercaRang(long numMin, long numMax, Node source) {
+    public void findByRange(Node source, long lowerTimestamp, long higherTimestamp) {
 
-        trobat(numMin, numMax, source);
+        search(source, lowerTimestamp, higherTimestamp);
 
         if(printer.size() > 0) {
 
@@ -54,26 +51,32 @@ public class FuncionalitatsCerca {
             }
 
         } else {
-            System.out.println("No existeix un algorisme amb un timestamp entre " + numMin + " i " + numMax);
+            System.out.println("No existeix un algorisme amb un timestamp entre " + lowerTimestamp + " i " + higherTimestamp);
         }
 
     }
 
-    private void trobat(long numMin, long numMax, Node source) {    // preorder
+    /**
+     * Recorreremos el árbol y añadiremos todos los nodos que encontremos dentro del rango en una lista.
+     * @param source Nodo raíz del árbol.
+     * @param lowerTimestamp Valor mínimo permitido.
+     * @param higherTimestamp Valor máximo permitido.
+     */
+    private void search(Node source, long lowerTimestamp, long higherTimestamp) {    // preorder
 
-        if(source.getTimestamp() >= numMin) {
+        if(source.getTimestamp() >= lowerTimestamp) {
             if(source.getLeft() != null) {
-                trobat(numMin, numMax, source.getLeft());
+                search(source.getLeft(), lowerTimestamp, higherTimestamp);
             }
         }
 
-        if(source.getTimestamp() >= numMin && source.getTimestamp() <= numMax) {
+        if(source.getTimestamp() >= lowerTimestamp && source.getTimestamp() <= higherTimestamp) {
             printer.add(source);
         }
 
-        if(source.getTimestamp() <= numMax){
+        if(source.getTimestamp() <= higherTimestamp){
             if(source.getRight() != null) {
-                trobat(numMin, numMax, source.getRight());
+                search(source.getRight(), lowerTimestamp, higherTimestamp);
             }
         }
 

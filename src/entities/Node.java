@@ -5,6 +5,9 @@ import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.Date;
 
+/**
+ *
+ */
 public class Node {
 
     private int id;
@@ -16,9 +19,10 @@ public class Node {
     /**
      * Binary Search Tree variables
      */
-    private Node parent;
     private Node right;
     private Node left;
+    private int height;
+    private int balance;
 
     public Node(int id, String name, String language, String cost, long timestamp) {
         this.id = id;
@@ -26,7 +30,6 @@ public class Node {
         this.language = language;
         this.cost = cost;
         this.timestamp = timestamp;
-        this.parent = null;
         this.right = null;
         this.left = null;
     }
@@ -71,14 +74,6 @@ public class Node {
         this.timestamp = timestamp;
     }
 
-    public Node getParent() {
-        return parent;
-    }
-
-    public void setParent(Node parent) {
-        this.parent = parent;
-    }
-
     public Node getRight() {
         return right;
     }
@@ -94,6 +89,15 @@ public class Node {
     public void setLeft(Node left) {
         this.left = left;
     }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
 
     public String getTimestampDate(){
         // dd/mm/yy hh/mm/ss
