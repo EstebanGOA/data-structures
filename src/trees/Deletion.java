@@ -5,41 +5,58 @@ import entities.Node;
 public class Deletion {
 
 
-    public void findById(Node parent, int id, boolean flag) {
+    public Node findById(Node parent, int id, boolean flag) {
         // Search until we find the node then stop the search
 
-
-
-
         if ( parent.getLeft() != null) {
-            findById(parent.getLeft(), id, flag);
+            parent.setLeft(findById(parent.getLeft(), id, flag));
         }
 
         if ( parent.getId() == id) {
 
-            delete(parent);
+            parent = delete(parent);
 
         }
-        if (flag) return;
+        if (flag) return parent;
 
         if ( parent.getRight() != null) {
-            findById(parent.getRight(), id, flag);
+            parent.setRight(findById(parent.getRight(), id, flag));
         }
-
+        return parent;
     }
 
-    public void delete(Node node) {
+    /*
+    Node delete(Node node, int key) {
+        if (node == null) {
+            return node;
+        } else if (node.id > key) {
+            node.left = delete(node.left, key);
+        } else if (node.key < key) {
+            node.right = delete(node.right, key);
+        } else {
+            if (node.left == null || node.right == null) {
+                node = (node.left == null) ? node.right : node.left;
+            } else {
+                Node mostLeftChild = mostLeftChild(node.right);
+                node.key = mostLeftChild.key;
+                node.right = delete(node.right, node.key);
+            }
+        }
+        if (node != null) {
+            node = rebalance(node);
+        }
+        return node;
+    }
 
-        if (node.getRight() == null && node.getLeft() == null) {
-            node = null;
-            return;
-        } else if (node.getRight() == null) {
-            node = node.getLeft();
-        } else if (node.getLeft() == null) {
-            node = node.getRight();
+    */
+    public Node delete(Node node) {
+
+        if (node.getLeft() == null || node.getRight() == null) {
+            node = (node.getLeft() == null) ? node.getRight() : node.getLeft();
         } else {
             node = find(node.getLeft());
         }
+        return node;
     }
 
     public Node find(Node parent) {

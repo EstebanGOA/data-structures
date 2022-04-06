@@ -58,7 +58,7 @@ public class Menu {
                 case "B" -> {
                     int id = askForInteger("Identificador de l'algorisme: ");
                     Deletion deletion = new Deletion();
-                    deletion.findById(source, id, false);
+                    source = deletion.findById(source, id, false);
 
                 }
                 case "C" -> {

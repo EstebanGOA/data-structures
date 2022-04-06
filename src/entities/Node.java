@@ -29,6 +29,16 @@ public class Node {
         fb = 0;
     }
 
+    public Node(Node newNode) {
+        this.name = newNode.getName();
+        this.language = newNode.language;
+        this.cost = newNode.getCost();
+        this.timestamp = newNode.getTimestamp();
+        this.parent = null;
+        this.right = newNode.getRight();
+        this.left = newNode.getLeft();
+    }
+
     public int getId() {
         return id;
     }
