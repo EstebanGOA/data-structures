@@ -3,6 +3,7 @@ package entities;
 import graphs.DramaContext;
 import graphs.FacilitacioNet;
 import graphs.NetworkScan;
+import io.RTreeReader;
 import io.TreeReader;
 import io.UserReader;
 import trees.TreeDelete;
@@ -17,11 +18,13 @@ public class Menu {
     private final Scanner scanner;
     private User[] users;
     private Node source;
+    private Rectangle rectangle;
 
     public Menu() {
         this.scanner = new Scanner(System.in);
         this.users = new UserReader().readFile();
         this.source = new TreeReader().readFile();
+        this.rectangle = new RTreeReader().readFile();
     }
 
 
@@ -168,6 +171,13 @@ public class Menu {
         System.out.println("\tD. Networking");
         System.out.println("\n\tE. Tornar enrere\n");
          return askForString("Quina funcionalitat vols executar? ");
+    }
+
+    private String circlesMenu() {
+        System.out.println("\n\tA. Afegir cercle.");
+        System.out.println("\tB. Eliminar cercle.");
+        return askForString("Quina funcionalitat vols executar? ");
+
     }
 
     private void mainMenu() {
