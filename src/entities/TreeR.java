@@ -31,7 +31,7 @@ public class TreeR {
         return r;
 
     }
-
+    // Diap 8 a la 9
     public Rectangle expand(Rectangle r) {
 
         Point min = r.getMinPoint();
