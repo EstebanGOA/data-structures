@@ -2,47 +2,41 @@ package entities;
 
 import utilities.ArrayList;
 
-public class Rectangle {
+public class Rectangle extends Figura {
     private float maxX;
     private float maxY;
     private float minX;
     private float minY;
-    private ArrayList<Rectangle> rectangles;
-    private ArrayList<Point> points;
+    private ArrayList<Figura> figuras;
+
 
     public Rectangle(float maxX, float maxY, float minX, float minY) {
-        rectangles = new ArrayList<>();
-        points = new ArrayList<>();
+        figuras = new ArrayList<>();
     }
 
 
-    public ArrayList<Rectangle> getRectangles() {
-        return rectangles;
+    public ArrayList<Figura> getFiguras() {
+        return figuras;
     }
 
-    public void addRectangle(Rectangle r) {
-        rectangles.add(r);
+
+
+    public void addFigura(Figura f) {
+        figuras.add(f);
     }
 
-    public void addPoint(Point p) {
-        points.add(p);
+    public Figura getFigura(int index) {
+        return figuras.get(index);
     }
 
-    // Esto esta mal
     public int checkArea(Point point) {
-        float[] dif = new float[rectangles.size()];
+        float[] dif = new float[figuras.size()];
         int best = 0;
         float bestArea = Integer.MAX_VALUE;
 
-        for (int i = 0; i < rectangles.size(); i++) {
-            float area = (maxX - minX) * (maxY - minY);
-            // Faltan cositas
+        for (int i = 0; i < figuras.size(); i++) {
 
 
-            float areaAux = (point.getX() - minX) * (point.getY() - minY);
-
-
-            dif[i] = areaAux - area;
 
             // Check the area that is smaller with the new point inside
             if (dif[i] < bestArea) {
@@ -56,39 +50,36 @@ public class Rectangle {
 
     }
 
-    public ArrayList<Point> getPoints() {
-        return points;
-    }
 
-    public Rectangle getLeft() {
-        return rectangles.get(0);
-    }
 
-    public Rectangle getMiddle() {
-        return rectangles.get(1);
-    }
 
-    public Rectangle getRight() {
-        return rectangles.get(2);
-    }
 
-    public Point getMinPoint() {
+    /**
+     * Function that returns the minimum point
+     * @return Returns the minimum point
+     */
+    public Figura getMinPoint() {
         int pos = 0;
         float min = Float.MAX_VALUE;
-        for (int i = 0; i < points.size(); i++) {
-            float aux = points.get(i).getSuma();
+        for (int i = 0; i < figuras.size(); i++) {
+            float aux = (Point) figuras.get(i).getSuma();
            if (aux  < min) {
                pos = i;
                min = aux;
            }
         }
-        return points.get(pos);
+        return figuras.get(pos);
     }
 
+
+    /**
+     * Function that returns the minimum point
+     * @return Returns the minimum point
+     */
     public Point getMaxPoint() {
         int pos = 0;
         float max = Float.MIN_VALUE;
-        for (int i = 0; i < points.size(); i++) {
+        for (int i = 0; i <  points.size(); i++) {
             float aux = points.get(i).getSuma();
             if (aux  > max) {
                 pos = i;
@@ -99,4 +90,47 @@ public class Rectangle {
     }
 
 
+
+    public void removeRectangle(Rectangle r) {
+         figuras.remove(r);
+    }
+
+    public float getMaxX() {
+        return maxX;
+    }
+
+    public float getMaxY() {
+        return maxY;
+    }
+
+    public float getMinX() {
+        return minX;
+    }
+
+    public float getMinY() {
+        return minY;
+    }
+    public float getArea() {
+        return (maxX - minX) * (maxY - minY);
+    }
+
+    public void updateArea(Point p) {
+        if (p.getX() > maxX) {
+            maxX = p.getX();
+        }
+        if (p.getX() < minX) {
+            minX = p.getX();
+        }
+        if (p.getY() > maxY) {
+            maxY = p.getY();
+        }
+        if (p.getY() < minY) {
+            minY = p.getY();
+        }
+    }
+
+    @Override
+    public Double[] findCenter() {
+        return new Double[0];
+    }
 }

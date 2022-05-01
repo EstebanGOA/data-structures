@@ -1,6 +1,6 @@
 package entities;
 
-public class Point {
+public class Point extends Figura {
     private float x;
     private float y;
     private float radius;
@@ -22,6 +22,11 @@ public class Point {
     }
     public float getSuma() {
         return x + y;
+    }
+
+    @Override
+    public Double[] findCenter() {
+        return new Double[0];
     }
 }
 

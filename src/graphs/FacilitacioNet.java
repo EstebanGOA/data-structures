@@ -27,7 +27,7 @@ public class FacilitacioNet {
 
     public void dijkstra() {
 
-        MyQueue queue = new MyQueue();
+
 
 
             Arrays.fill(d, Integer.MAX_VALUE);

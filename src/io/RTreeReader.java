@@ -44,8 +44,12 @@ public class RTreeReader {
                         Float.parseFloat(inputParse[2]),
                         inputParse[3]);
                 Rectangle r = new Rectangle(point.getX(), point.getY(), point.getX(), point.getY());
+                Rectangle root = new Rectangle(point.getX(), point.getY(), point.getX(), point.getY());
+                r.addPoint(point);
+                root.addRectangle(r);
 
-                treeR.insert(r, point);
+
+                
 
                 for (int i = 0; i < numColors - 1; i++) {
                     input = myReader.nextLine();
@@ -55,7 +59,7 @@ public class RTreeReader {
                             Float.parseFloat(inputParse[1]),
                             Float.parseFloat(inputParse[2]),
                             inputParse[3]);
-                    treeR.insert(r, pointAux);
+                    treeR.insert(root, pointAux);
 
 
                 }

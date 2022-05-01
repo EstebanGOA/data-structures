@@ -1,60 +1,61 @@
 package entities;
 
+import java.util.ArrayList;
+
 public class TreeR {
+
+    private int flag = 0;
+    private Rectangle next;
 
     public Rectangle insert(Rectangle r, Point p) {
         // Caso de ir al siguiente rectangulo
-        if (r.getPoints() == null) {
-            switch (r.checkArea(p)) {
-                case 0:  return insert(r.getLeft(), p);
+        if (r.getFigura(0) instanceof Rectangle) {
 
-                case 1:  return insert(r.getMiddle(), p);
+            insert((Rectangle) r.getFigura(0), p);
+        }
 
-                case 2:  return insert(r.getRight(),p);
-            }
+
+        // This if serves as a condition to go back to the previous rectangle,
+        // before doing the expand of 2 rectangles when we have 4 points
+        if(flag == 1) {
+            expand(next, r);
+            flag = 0;
 
         }
         // Si es hoja  y no pasa el maximo de puntos
+        if (r.getFigura(0) instanceof Point) {
 
-        if (r.getPoints() != null) {
+            r.addFigura(p);
 
-            r.addPoint(p);
-            if (r.getPoints().size() > 3) {
-
-            r = expand(r);
+            if (r.getFiguras().size() > 3) {
+                flag = 1;
+                next = r;
             }
 
+
         }
-
-
 
         return r;
 
     }
     // Diap 8 a la 9
-    public Rectangle expand(Rectangle r) {
+    public Rectangle expand(Rectangle r, Rectangle root) {
 
-        Point min = r.getMinPoint();
-        Point max = r.getMaxPoint();
+        Figura min = r.getMinPoint();
+        Figura max = r.getMaxPoint();
         Rectangle rectangle1 = new Rectangle(min.getX(), min.getY(), min.getX(), min.getY());
-        Rectangle rectangle2 = new Rectangle(max.getX(), max.getY(), max.getX(), min.getY());
+        Rectangle rectangle2 = new Rectangle(max.getX(), max.getY(), max.getX(), max.getY());
+        root.removeRectangle(r);
 
-        rectangle1.addPoint(min);
+        rectangle1.addFigura(min);
+        rectangle2.addFigura(max);
+        root.addFigura(rectangle1);
+        root.addFigura(rectangle2);
 
-        rectangle2.addPoint(max);
-        r.addRectangle(rectangle1);
-        r.addRectangle(rectangle2);
 
-        for(int i = 0; i < 2; i++) {
-            Point point = r.getPoints().get(i);
-            switch(r.checkArea(point)) {
-                case 0: r.getLeft().addPoint(point);
 
-                case 1: r.getMiddle().addPoint(point);
 
-            }
-        }
-        r.getPoints().clear();
+
 
 
 
