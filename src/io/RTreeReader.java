@@ -43,10 +43,13 @@ public class RTreeReader {
                         Float.parseFloat(inputParse[1]),
                         Float.parseFloat(inputParse[2]),
                         inputParse[3]);
-                Rectangle r = new Rectangle(point.getX(), point.getY(), point.getX(), point.getY());
-                Rectangle root = new Rectangle(point.getX(), point.getY(), point.getX(), point.getY());
-                r.addPoint(point);
-                root.addRectangle(r);
+
+                point.setParent("root");
+
+                Rectangle r = new Rectangle(point.getMaxX(), point.getMaxY(), point.getMinX(), point.getMinY());
+                Rectangle root = new Rectangle(point.getMaxX(), point.getMaxY(), point.getMinX(), point.getMinY());
+                r.addFigura(point);
+                root.addFigura(r);
 
 
                 

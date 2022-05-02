@@ -1,32 +1,55 @@
 package entities;
 
 public class Point extends Figura {
-    private float x;
-    private float y;
-    private float radius;
+    private double x;
+    private double y;
+    private double radius;
     private String color;
 
-    public Point(float x, float y, float radius, String color) {
+    public Point(double x, double y, double radius, String color) {
         this.x = x;
         this.y = y;
         this.radius = radius;
         this.color = color;
     }
 
-    public float getX() {
-        return x;
-    }
 
-    public float getY() {
-        return y;
-    }
-    public float getSuma() {
+
+    public double getSuma() {
         return x + y;
     }
 
     @Override
-    public Double[] findCenter() {
-        return new Double[0];
+    public double getMaxX() {
+        return x;
+    }
+
+    @Override
+    public double getMaxY() {
+        return y;
+    }
+
+    @Override
+    public double getMinX() {
+        return x;
+    }
+
+    @Override
+    public double getMinY() {
+        return y;
+    }
+
+    @Override
+    public void addFigura(Figura f) {
+
+    }
+
+    @Override
+    public double[] findCenter() {
+        double[] center = new double[2];
+        center[0] = x;
+        center[1] = y;
+        return center;
     }
 }
 
