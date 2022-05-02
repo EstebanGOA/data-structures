@@ -45,8 +45,6 @@ public class RTreeReader {
                         inputParse[3]);
                 Rectangle r = new Rectangle(point.getX(), point.getY(), point.getX(), point.getY());
                 Rectangle root = new Rectangle(point.getX(), point.getY(), point.getX(), point.getY());
-                r.addPoint(point);
-                root.addRectangle(r);
 
 
                 

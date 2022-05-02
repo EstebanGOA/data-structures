@@ -1,8 +1,8 @@
 package entities;
 
 public abstract class Figura {
-    private Figura parent;
 
+    private Figura parent;
 
     public abstract Double[] findCenter();
 
@@ -13,4 +13,7 @@ public abstract class Figura {
     public void setParent(Figura parent) {
         this.parent = parent;
     }
+
+
+
 }
