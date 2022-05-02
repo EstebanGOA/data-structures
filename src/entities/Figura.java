@@ -25,4 +25,6 @@ public abstract class Figura {
     public abstract double getMinY();
 
     public abstract void addFigura(Figura f);
+
+    public abstract  void updateArea();
 }

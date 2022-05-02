@@ -71,7 +71,9 @@ public class TreeR {
             root.getFigura(index).addFigura(figura);
         }
 
-
+        for (int j = 0; j < root.getFiguras().size(); j++) {
+             root.getFigura(j).updateArea();
+        }
 
         return r;
     }

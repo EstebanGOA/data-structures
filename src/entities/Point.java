@@ -45,6 +45,11 @@ public class Point extends Figura {
     }
 
     @Override
+    public void updateArea() {
+
+    }
+
+    @Override
     public double[] findCenter() {
         double[] center = new double[2];
         center[0] = x;
