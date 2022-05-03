@@ -19,6 +19,14 @@ public class Rectangle extends Figura {
         this.minX = minX;
         this.minY = minY;
     }
+    public Rectangle(Figura f) {
+        figuras = new ArrayList<>();
+        addFigura(f);
+        this.maxX = f.getMaxX();
+        this.maxY = f.getMaxY();
+        this.minX = f.getMinX();
+        this.minY = f.getMinY();
+    }
 
     public ArrayList<Figura> getFiguras() {
         return figuras;
