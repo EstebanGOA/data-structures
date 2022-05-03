@@ -14,7 +14,6 @@ public class TreeR {
         // Caso de ir al siguiente rectangulo
         if (r.getFigura(0) instanceof Rectangle) {
 
-            // insert((Rectangle) r.getFigura(r.checkArea(p)), p);
             insert((Rectangle) r.getFigura( r.checkArea(p)), p);
         }
 
@@ -35,10 +34,17 @@ public class TreeR {
 
 
         }
-        if (r.getFiguras().size() > 3) {
+        if (r.getFiguras().size() > 3 && r.getParent() == null) {
             flag = 1;
             next = r;
+        } else if (r.getFiguras().size() > 3 && r.getParent().equals("root")) {
+            Rectangle aux = r;
+            r = new Rectangle(aux);
+
+            r = expand(aux, r);
         }
+
+
 
         r.updateArea();
 
@@ -48,6 +54,7 @@ public class TreeR {
     // Diap 8 a la 9
     public Rectangle expand(Rectangle r, Rectangle root) {
         // Falta gestionar
+
 
 
         Figura min = r.getMinPoint();
