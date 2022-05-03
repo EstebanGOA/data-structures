@@ -4,7 +4,10 @@ import entities.*;
 import entities.Point;
 import entities.Rectangle;
 
+import javax.swing.*;
 import java.awt.*;
+import java.awt.event.AdjustmentEvent;
+import java.awt.event.AdjustmentListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -43,8 +46,13 @@ public class RTreeReader {
                         Float.parseFloat(inputParse[1]),
                         Float.parseFloat(inputParse[2]),
                         inputParse[3]);
-                Rectangle r = new Rectangle(point.getX(), point.getY(), point.getX(), point.getY());
-                Rectangle root = new Rectangle(point.getX(), point.getY(), point.getX(), point.getY());
+
+                point.setParent("root");
+
+                Rectangle r = new Rectangle(point.getMaxX(), point.getMaxY(), point.getMinX(), point.getMinY());
+                Rectangle root = new Rectangle(point.getMaxX(), point.getMaxY(), point.getMinX(), point.getMinY());
+                r.addFigura(point);
+                root.addFigura(r);
 
 
                 
@@ -61,6 +69,27 @@ public class RTreeReader {
 
 
                 }
+
+                JFrame window = new JFrame();
+                window.setSize(1280, 720);
+                JDraw draw = new JDraw(root);
+                JScrollPane scrollPane = new JScrollPane(draw);
+                JScrollBar hBar = new JScrollBar(JScrollBar.HORIZONTAL, 30, 20, 0, 500);
+                JScrollBar vBar = new JScrollBar(JScrollBar.VERTICAL, 30, 20, 0, 500);
+
+                class MyAdjustmentListener implements AdjustmentListener {
+                    public void adjustmentValueChanged(AdjustmentEvent e) {
+                        scrollPane.repaint();
+                    }
+                }
+
+                hBar.addAdjustmentListener(new MyAdjustmentListener());
+                vBar.addAdjustmentListener(new MyAdjustmentListener());
+
+                window.add(hBar, BorderLayout.SOUTH);
+                window.add(vBar, BorderLayout.EAST);
+                window.add(scrollPane, BorderLayout.CENTER);
+                window.setVisible(true);
 
                 return null;
 
