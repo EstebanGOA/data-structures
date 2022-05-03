@@ -11,31 +11,32 @@ public class JDraw extends JPanel {
 
     public JDraw(Figura f) {
         this.f = f;
+        setSize(1280, 720);
         setVisible(true);
-        setAutoscrolls(true);
     }
 
-    public void draw(Graphics g, Figura f) {
-
+    public void draw(Graphics g, Figura f, double maxX, double maxY) {
+        g.setColor(Color.BLACK);
+        int normalizedX = (int) ((f.getMinX() / maxX) * 1280);
+        int normalizedY = (int) ((f.getMinY() / maxY) * 720);
         if (f instanceof Rectangle r) {
-            int width = (int) (r.getMaxX() - r.getMinX());
-            int height = (int) (r.getMaxY() - r.getMinY());
-            g.drawRect((int) r.getMinX(), (int) r.getMinY(), width + 10, height + 10);
+            int width = (int) (((r.getMaxX() - r.getMinX()) / maxX) * 1280);
+            int height = (int) (((r.getMaxY() - r.getMinY()) / maxY) * 720);
+            g.drawRect(normalizedX, normalizedY, width + 10, height + 10);
             ArrayList<Figura> list = r.getFiguras();
             for (int i = 0; i < list.size(); i++) {
-                draw(g, list.get(i));
+                draw(g, list.get(i), maxX, maxY);
             }
         } else if (f instanceof Point p) {
-            g.drawOval((int) p.getMaxX(), (int) p.getMaxY(), 10, 10);
+            g.drawOval(normalizedX, normalizedY, 10, 10);
         }
     }
 
     @Override
     protected void paintComponent(Graphics g) {
-        Graphics2D g2 = (Graphics2D) g;
         super.paintComponents(g);
-        g2.setColor(Color.RED);
-        draw(g2, f);
+        g.setColor(Color.RED);
+        draw(g, f, f.getMaxX(), f.getMaxY());
     }
 
 }

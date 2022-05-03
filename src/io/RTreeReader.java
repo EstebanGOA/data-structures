@@ -70,28 +70,7 @@ public class RTreeReader {
 
                 }
 
-                JFrame window = new JFrame();
-                window.setSize(1280, 720);
-                JDraw draw = new JDraw(root);
-                JScrollPane scrollPane = new JScrollPane(draw);
-                JScrollBar hBar = new JScrollBar(JScrollBar.HORIZONTAL, 30, 20, 0, 500);
-                JScrollBar vBar = new JScrollBar(JScrollBar.VERTICAL, 30, 20, 0, 500);
-
-                class MyAdjustmentListener implements AdjustmentListener {
-                    public void adjustmentValueChanged(AdjustmentEvent e) {
-                        scrollPane.repaint();
-                    }
-                }
-
-                hBar.addAdjustmentListener(new MyAdjustmentListener());
-                vBar.addAdjustmentListener(new MyAdjustmentListener());
-
-                window.add(hBar, BorderLayout.SOUTH);
-                window.add(vBar, BorderLayout.EAST);
-                window.add(scrollPane, BorderLayout.CENTER);
-                window.setVisible(true);
-
-                return null;
+                return root;
 
             } catch (FileNotFoundException e) {
                 System.out.println("The file does not exist");

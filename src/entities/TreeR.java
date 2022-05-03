@@ -7,6 +7,9 @@ public class TreeR {
     private int flag = 0;
     private Rectangle next;
 
+
+    private int flag2 = 0;
+
     public Rectangle insert(Rectangle r, Point p) {
         // Caso de ir al siguiente rectangulo
         if (r.getFigura(0) instanceof Rectangle) {
@@ -75,6 +78,36 @@ public class TreeR {
              root.getFigura(j).updateArea();
         }
 
+        return r;
+    }
+
+    public Rectangle delete(Rectangle r, Point p ) {
+        int index = 0;
+        if ( r.getFigura(0) instanceof  Rectangle) {
+            index =  r.checkArea(p);
+           delete((Rectangle) r.getFigura(index), p);
+        }
+
+        if ( r.getFigura(0) instanceof  Point) {
+            for(int i = 0; i < r.getFiguras().size(); i++ ) {
+                if(r.getFigura(i).getMaxX() == p.getMaxY()
+                && r.getFigura(i).getMaxY() == p.getMaxY()) {
+                    r.removeFigura(r.getFigura(i));
+                }
+            }
+        }
+
+
+        if(flag2 == 1) {
+            r.removeFigura(r.getFigura(index));
+            flag2 = 0;
+        }
+
+        if (r.getFiguras().size() == 0) {
+            flag2 = 1;
+        }
+
+        r.updateArea();
         return r;
     }
 }

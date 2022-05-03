@@ -11,6 +11,10 @@ import graphs.Recommendation;
 import trees.Feed;
 import trees.TreeSearchNode;
 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.AdjustmentEvent;
+import java.awt.event.AdjustmentListener;
 import java.util.Scanner;
 
 public class Menu {
@@ -25,8 +29,6 @@ public class Menu {
         this.users = new UserReader().readFile();
         this.source = new TreeReader().readFile();
         this.rectangle = new RTreeReader().readFile();
-
-
     }
 
 
@@ -42,6 +44,9 @@ public class Menu {
                 }
                 case 2 -> {
                     executeSecondOption();
+                }
+                case 3 -> {
+                    executeThridOption();
                 }
                 case 5 -> {
                     exit = true;
@@ -133,6 +138,46 @@ public class Menu {
         }
     }
 
+    private void executeThridOption(){
+        while (true) {
+            String option = circlesMenu();
+            System.out.println();
+            switch (option) {
+                case "A" -> {
+                    double x = askForDouble("Entra la coordenada X del centre del cercle a afegir: ");
+                    double y = askForDouble("Entra la coordenada Y del centre del cercle a afegir: ");
+                    double radious = askForDouble("Entra el radi del cercle a afegir: ");
+                    String color = askForString("Entra el color del cercle a afegir: ");
+                    Point point = new Point(x, y, radious, color);
+                    TreeR treeR = new TreeR();
+                    this.rectangle = treeR.delete(this.rectangle, point);
+
+                }
+                case "B" -> {
+                    double x = askForDouble("Entra la coordenada X del centre del cercle a eliminar: ");
+                    double y = askForDouble("Entra la coordenada Y del centre del cercle a eliminar: ");
+                    Point point = new Point(x, y, 0, null);
+                    TreeR treeR = new TreeR();
+                    this.rectangle = treeR.delete(this.rectangle, point);
+                    System.out.println("hola");
+                }
+                case "C" -> {
+                    JFrame window = new JFrame();
+                    window.setSize(1920, 1080);
+                    JDraw draw = new JDraw(rectangle);
+                    window.add(draw, BorderLayout.CENTER);
+                    window.setVisible(true);
+                }
+                case "D" -> {
+
+                }
+                case "E" -> {
+                    return ;
+                }
+            }
+        }
+    }
+
     private String askForString(String msg) {
         System.out.print(msg);
         return scanner.nextLine();
@@ -151,6 +196,15 @@ public class Menu {
         try {
             System.out.print(msg);
             return Long.parseLong(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            return -1;
+        }
+    }
+
+    private double askForDouble(String msg) {
+        try {
+            System.out.print(msg);
+            return Double.parseDouble(scanner.nextLine());
         } catch (NumberFormatException e) {
             return -1;
         }
