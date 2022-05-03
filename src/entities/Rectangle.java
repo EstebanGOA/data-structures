@@ -113,6 +113,10 @@ public class Rectangle extends Figura {
 
     public void updateArea() {
 
+        maxX = Double.MIN_VALUE;
+        maxY = Double.MIN_VALUE;
+        minX = Double.MAX_VALUE;
+        minY = Double.MAX_VALUE;
         for(int i = 0; i <figuras.size(); i++) {
 
             Figura f = figuras.get(i);

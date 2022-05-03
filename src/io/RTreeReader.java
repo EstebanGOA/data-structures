@@ -67,7 +67,7 @@ public class RTreeReader {
 
                 }
 
-                return null;
+                return root;
 
             } catch (FileNotFoundException e) {
                 System.out.println("The file does not exist");
