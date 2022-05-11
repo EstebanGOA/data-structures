@@ -5,11 +5,10 @@ import utilities.ArrayList;
 import javax.swing.*;
 import java.awt.*;
 
-public class JDraw extends JPanel {
-
+public class JTreeDraw extends JPanel {
     private Figura f;
 
-    public JDraw(Figura f) {
+    public JTreeDraw(Figura f) {
         this.f = f;
         setSize(1280, 720);
         setVisible(true);

@@ -6,6 +6,10 @@ import graphs.NetworkScan;
 import io.RTreeReader;
 import io.TreeReader;
 import io.UserReader;
+import tables.Advertising;
+import tables.JTableDrawer;
+import tables.Table;
+import tables.TablesReader;
 import trees.TreeDelete;
 import graphs.Recommendation;
 import trees.Feed;
@@ -13,8 +17,6 @@ import trees.TreeSearchNode;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.AdjustmentEvent;
-import java.awt.event.AdjustmentListener;
 import java.util.Scanner;
 
 public class Menu {
@@ -23,12 +25,14 @@ public class Menu {
     private User[] users;
     private Node source;
     private Rectangle rectangle;
+    private Table table;
 
     public Menu() {
         this.scanner = new Scanner(System.in);
         this.users = new UserReader().readFile();
         this.source = new TreeReader().readFile();
         this.rectangle = new RTreeReader().readFile();
+        this.table = new TablesReader().readFile();
     }
 
 
@@ -48,6 +52,9 @@ public class Menu {
                 case 3 -> {
                     executeThridOption();
                 }
+                case 4 -> {
+                    executeFourthOption();
+                }
                 case 5 -> {
                     exit = true;
                     System.out.println("\nAturant LinkedTree...");
@@ -57,6 +64,51 @@ public class Menu {
                 }
             }
 
+        }
+    }
+
+    private void executeFourthOption() {
+        while (true) {
+            String option = tablesMenu();
+            System.out.println();
+            switch(option) {
+                case "A" -> {
+                    // Añadir empresa
+                    String name = askForString("Entra el nom de l'empresa a afegir: ");
+                    String date = askForString("Entra el dia de la setmana en el que está interessada: ");
+                    int price = askForInteger("Entra el preu que pot pagar, en euros: ");
+                    Advertising advertising = new Advertising(name, date, price);
+                    table.put(name, advertising);
+                    System.out.println("\nL'empresa s'ha afegit correctament al sistema gestor d'anuncis.");
+                }
+                case "B" -> {
+                    // Eliminar empresa
+                    String name = askForString("Entra el nom de l'empresa a eliminar: ");
+                    table.remove(name);
+                    System.out.println("\nL'empresa s'ha eliminat correctament del sistema gestor d'anuncis.");
+                }
+                case "C" -> {
+                    // Consultar empresa
+                    String name = askForString("Entra el nom de l'empresa a consultar: ");
+                    Advertising advertising = table.get(name);
+                    if (advertising != null) {
+                        System.out.println(advertising.toString());
+                    } else {
+                        System.out.println("No s'ha trobat cap empresa amb el nom introduït. ");
+                    }
+                }
+                case "D" -> {
+                    // Histograma por dias
+                    JFrame frame = new JFrame("Histogram Panel");
+                    frame.setSize(1280, 720);
+                    frame.add(new JTableDrawer(table.countDays()), BorderLayout.CENTER );
+                    frame.setResizable(true);
+                    frame.setVisible(true);
+                }
+                case "E" -> {
+                    return ;
+                }
+            }
         }
     }
 
@@ -164,7 +216,7 @@ public class Menu {
                 case "C" -> {
                     JFrame window = new JFrame();
                     window.setSize(1920, 1080);
-                    JDraw draw = new JDraw(rectangle);
+                    JTreeDraw draw = new JTreeDraw(rectangle);
                     window.add(draw, BorderLayout.CENTER);
                     window.setVisible(true);
                 }
@@ -210,6 +262,15 @@ public class Menu {
         }
     }
 
+    private String tablesMenu() {
+        System.out.println("\n\tA. Afegir una empresa");
+        System.out.println("\tB. Eliminar una empresa");
+        System.out.println("\tC. Consultar empresa");
+        System.out.println("\tD. Histograma per dies");
+        System.out.println("\n\tE. Tornar enrere\n");
+        return askForString("Quina funcionalitat vols executar? ");
+    }
+
     private String treesMenu() {
         System.out.println("\n\tA. Afegir algorisme");
         System.out.println("\tB. Eliminar algorisme");
@@ -230,8 +291,12 @@ public class Menu {
     }
 
     private String circlesMenu() {
-        System.out.println("\n\tA. Afegir cercle.");
-        System.out.println("\tB. Eliminar cercle.");
+        System.out.println("\n\tA. Afegir cercle");
+        System.out.println("\tB. Eliminar cercle");
+        System.out.println("\tC. Visualitzar");
+        System.out.println("\tD. Cerca per área");
+        System.out.println("\tE. Cerca especial");
+        System.out.println("\n\tF. Tornar enrere\n");
         return askForString("Quina funcionalitat vols executar? ");
 
     }
@@ -240,8 +305,8 @@ public class Menu {
         System.out.println("\n.* LinkedTree *.\n");
         System.out.println("1. Seguidors (Grafs)");
         System.out.println("2. Feed (Arbres)");
-        System.out.println("3. A ESPECIFICAR");
-        System.out.println("4. A ESPECIFICAR\n");
+        System.out.println("3. Canvas (Arbres R)");
+        System.out.println("4. Anuncis (Taules)\n");
         System.out.println("5. Sortir\n");
     }
 
