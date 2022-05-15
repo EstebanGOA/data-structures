@@ -41,7 +41,7 @@ public class TreeR {
             Rectangle aux = r;
             r = new Rectangle(aux);
 
-            r = expand(aux, r);
+            expand(aux, r);
         }
 
 
@@ -97,9 +97,10 @@ public class TreeR {
 
         if ( r.getFigura(0) instanceof  Point) {
             for(int i = 0; i < r.getFiguras().size(); i++ ) {
-                if(r.getFigura(i).getMaxX() == p.getMaxY()
-                && r.getFigura(i).getMaxY() == p.getMaxY()) {
+                if (r.getFigura(i).getMaxX() == p.getMaxX()
+                        && r.getFigura(i).getMaxY() == p.getMaxY()) {
                     r.removeFigura(r.getFigura(i));
+
                 }
             }
         }

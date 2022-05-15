@@ -154,9 +154,10 @@ public class Menu {
                     double x = askForDouble("Entra la coordenada X del centre del cercle a eliminar: ");
                     double y = askForDouble("Entra la coordenada Y del centre del cercle a eliminar: ");
                     Point point = new Point(x, y, 0, null);
+
                     TreeR treeR = new TreeR();
                     this.rectangle = treeR.delete(this.rectangle, point);
-                    System.out.println("hola");
+                    System.out.println("hello");
                 }
                 case "C" -> {
 
