@@ -55,6 +55,9 @@ public class TreeR {
     public Rectangle expand(Rectangle r, Rectangle root) {
         // Falta gestionar
 
+        if (root.getParent().equals("root")) {
+
+        }
 
 
 
