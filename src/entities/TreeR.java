@@ -23,17 +23,13 @@ public class TreeR {
         if(flag == 1) {
             expand(next, r);
             flag = 0;
-
         }
+
         // Si es hoja  y no pasa el maximo de puntos
         if (r.getFigura(0) instanceof Point) {
-
             r.addFigura(p);
-
-
-
-
         }
+
         if (r.getFiguras().size() > 3 && r.getParent() == null) {
             flag = 1;
             next = r;

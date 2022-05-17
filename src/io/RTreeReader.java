@@ -4,7 +4,10 @@ import entities.*;
 import entities.Point;
 import entities.Rectangle;
 
+import javax.swing.*;
 import java.awt.*;
+import java.awt.event.AdjustmentEvent;
+import java.awt.event.AdjustmentListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -16,7 +19,7 @@ public class RTreeReader {
         /**
          * Ruta relativa de la ubicación del fichero.
          */
-        private final String path = "data/rtreeXXS.paed";
+        private final String path = "data/rtreeM.paed";
 
         /**
          * Cargará el fichero y creará la estructura del árbol R.

@@ -13,8 +13,6 @@ public class Point extends Figura {
         this.color = color;
     }
 
-
-
     public double getSuma() {
         return x + y;
     }

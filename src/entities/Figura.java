@@ -1,8 +1,8 @@
 package entities;
 
 public abstract class Figura {
-    private String parent;
 
+    private String parent;
 
     public abstract double[] findCenter();
 

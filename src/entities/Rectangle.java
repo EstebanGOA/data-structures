@@ -3,10 +3,12 @@ package entities;
 import utilities.ArrayList;
 
 public class Rectangle extends Figura {
+
     private double maxX;
     private double maxY;
     private double minX;
     private double minY;
+
     private ArrayList<Figura> figuras;
 
 
@@ -26,12 +28,9 @@ public class Rectangle extends Figura {
         this.minY = f.getMinY();
     }
 
-
     public ArrayList<Figura> getFiguras() {
         return figuras;
     }
-
-
 
     public void addFigura(Figura f) {
         figuras.add(f);
@@ -61,16 +60,9 @@ public class Rectangle extends Figura {
                 bestArea = dif;
                 best = i;
             }
-
         }
-
         return best;
-
     }
-
-
-
-
 
     /**
      * Function that returns the minimum point
@@ -89,7 +81,6 @@ public class Rectangle extends Figura {
         return  figuras.get(pos);
     }
 
-
     /**
      * Function that returns the minimum point
      * @return Returns the minimum point
@@ -107,8 +98,6 @@ public class Rectangle extends Figura {
 
         return figuras.get(pos);
     }
-
-
 
     public void removeFigura(Figura f) {
          figuras.remove(f);

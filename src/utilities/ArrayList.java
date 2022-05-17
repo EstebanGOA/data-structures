@@ -29,8 +29,20 @@ public class ArrayList<E> {
      */
     private static final int DEFAULT_CAPACITY = 10;
 
+    /**
+     * Constructor de ArrayList.
+     */
     public ArrayList() {
         this.items = new Object[DEFAULT_CAPACITY];
+        this.size = 0;
+    }
+
+    /**
+     * Constructor que da un tamaño determinado a la lista.
+     * @param initialSize Tamaño inicial de la lista.
+     */
+    public ArrayList(int initialSize) {
+        this.items = new Object[initialSize];
         this.size = 0;
     }
 
