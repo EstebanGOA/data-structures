@@ -57,6 +57,7 @@ public class TreeR {
 
 
 
+
         Figura min = r.getMinPoint();
         Figura max = r.getMaxPoint();
         Figura rectangle1 = new Rectangle(min.getMaxX(), min.getMaxY(), min.getMinX(), min.getMinY());
