@@ -1,5 +1,7 @@
 package entities;
 
+import org.w3c.dom.css.Rect;
+
 import java.util.ArrayList;
 
 public class TreeR {
@@ -34,11 +36,14 @@ public class TreeR {
             flag = 1;
             next = r;
         } else if (r.getFiguras().size() > 3 && r.getParent().equals("root")) {
-            Rectangle aux = r;
-            r = new Rectangle(aux);
+            Rectangle aux = new Rectangle(r);
+            r = new Rectangle(aux.getMaxX(), aux.getMaxY(), aux.getMinX(), aux.getMinY());
+            r.addFigura(aux);
+            r.setParent("root");
 
             expand(aux, r);
         }
+
 
 
 
@@ -47,13 +52,8 @@ public class TreeR {
         return r;
 
     }
-    // Diap 8 a la 9
-    public Rectangle expand(Rectangle r, Rectangle root) {
-        // Falta gestionar
+    public void expand(Rectangle r, Rectangle root) {
 
-        if (root.getParent().equals("root")) {
-
-        }
 
 
 
@@ -85,7 +85,7 @@ public class TreeR {
              root.getFigura(j).updateArea();
         }
 
-        return r;
+
     }
 
     public Rectangle delete(Rectangle r, Point p ) {
@@ -118,4 +118,6 @@ public class TreeR {
         r.updateArea();
         return r;
     }
+
+
 }
