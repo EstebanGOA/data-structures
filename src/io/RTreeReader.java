@@ -66,7 +66,7 @@ public class RTreeReader {
                             Float.parseFloat(inputParse[1]),
                             Float.parseFloat(inputParse[2]),
                             Color.decode(inputParse[3]));
-                    treeR.insert(root, pointAux);
+                    root = treeR.insert(root, pointAux);
 
 
                 }

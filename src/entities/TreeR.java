@@ -33,10 +33,14 @@ public class TreeR {
             flag = 1;
             next = r;
         } else if (r.getFiguras().size() > 3 && r.getParent().equals("root")) {
-            Rectangle aux = r;
-            r = new Rectangle(aux);
-            r = expand(aux, r);
+            Rectangle aux = new Rectangle(r);
+            r = new Rectangle(aux.getMaxX(), aux.getMaxY(), aux.getMinX(), aux.getMinY());
+            r.addFigura(aux);
+            r.setParent("root");
+
+            expand(aux, r);
         }
+
 
 
 
@@ -45,9 +49,8 @@ public class TreeR {
         return r;
 
     }
-    // Diap 8 a la 9
-    public Rectangle expand(Rectangle r, Rectangle root) {
-        // Falta gestionar
+    public void expand(Rectangle r, Rectangle root) {
+
 
 
 
@@ -79,7 +82,7 @@ public class TreeR {
              root.getFigura(j).updateArea();
         }
 
-        return r;
+
     }
 
     public Rectangle delete(Rectangle r, Point p ) {
@@ -91,9 +94,10 @@ public class TreeR {
 
         if ( r.getFigura(0) instanceof  Point) {
             for(int i = 0; i < r.getFiguras().size(); i++ ) {
-                if(r.getFigura(i).getMaxX() == p.getMaxY()
-                && r.getFigura(i).getMaxY() == p.getMaxY()) {
+                if (r.getFigura(i).getMaxX() == p.getMaxX()
+                        && r.getFigura(i).getMaxY() == p.getMaxY()) {
                     r.removeFigura(r.getFigura(i));
+
                 }
             }
         }
@@ -112,12 +116,14 @@ public class TreeR {
         return r;
     }
 
-    private boolean isColorSimilar(Color a, Color b) {
-        double difference = ((a.getRed() - b.getRed()) * (a.getRed() - b.getRed()) +
-                            (a.getBlue() - b.getBlue()) * (a.getBlue() - b.getBlue()) +
-                            (a.getGreen() - b.getGreen()) * (a.getGreen() - b.getGreen()));
 
-        return difference > 100;
+
+    private boolean isColorSimilar(Color a, Color b) {
+        double difference = Math.sqrt(((a.getRed() - b.getRed()) * (a.getRed() - b.getRed())) +
+                            ((a.getBlue() - b.getBlue()) * (a.getBlue() - b.getBlue())) +
+                            ((a.getGreen() - b.getGreen()) * (a.getGreen() - b.getGreen())));
+
+        return difference < 100;
     }
 
     private boolean isRadiusSimilar(double a, double b) {
@@ -128,8 +134,36 @@ public class TreeR {
         return Math.sqrt((y - p.getMinY()) * (y - p.getMinY()) + (x - p.getMinX()) * (x - p.getMinX())) < 100;
     }
 
-    public void searchArea(int x, int y, ArrayList<Point> similar) {
+    private boolean contains(double minX, double minY, double maxX, double maxY, Rectangle r) {
+        double dx = r.getMaxX() - r.getMinX();
+        double dy = r.getMaxY() - r.getMinY();
+        return ((minX - r.getMinX()) >= 0 || (maxX - r.getMaxX()) <= dx) || ((minY - r.getMinY()) >= 0 || (maxY - r.getMaxY()) <= dy);
+    }
 
+    private boolean contains(double minX, double minY, double maxX, double maxY, Point r) {
+        double dx = r.getMaxX() - r.getMinX();
+        double dy = r.getMaxY() - r.getMinY();
+        return ((minX - r.getMinX()) >= 0 && (maxX - r.getMaxX()) <= dx) && ((minY - r.getMinY()) >= 0 && (maxY - r.getMaxY()) <= dy);
+    }
+
+    public void searchArea(double minX, double minY, double maxX, double maxY, ArrayList<Point> similar, Figura f) {
+        // Tenemos que tener en cuenta que la esquina superior izquierda de la pantalla es el (0,0), es decir, que nuestros
+        // valores mínimos y máximos van al revés.
+        if (f instanceof Rectangle) {
+            Rectangle r = (Rectangle) f;
+            // En la función que comprobara si está dentro de dicho rectángulo introduciremos los puntos al revés.
+            if (contains(maxX, maxY, minX, minY, r)) {
+                ArrayList<Figura> list = r.getFiguras();
+                for (int i = 0; i < list.size(); i++) {
+                    searchArea(minX, minY, maxX, maxY, similar, list.get(i));
+                }
+            }
+        } else {
+            Point p = (Point) f;
+            if (contains(maxX, maxY, minX, minY, p)) {
+                similar.add(p);
+            }
+        }
     }
 
     public void searchSimilar(Figura r, int x, int y, double radius, Color color, ArrayList<Point> similar) {
@@ -141,9 +175,7 @@ public class TreeR {
         } else {
             Point p = (Point) r;
             if (isClose(p, x, y)) {
-                if (isColorSimilar(color, p.getColor())) {
-                    similar.add(p);
-                } else if (isRadiusSimilar(radius, p.getRadius())) {
+                if (isColorSimilar(color, p.getColor()) && isRadiusSimilar(radius, p.getRadius())) {
                     similar.add(p);
                 }
             }

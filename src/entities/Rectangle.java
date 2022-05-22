@@ -21,8 +21,7 @@ public class Rectangle extends Figura {
     }
 
     public Rectangle(Figura f) {
-        figuras = new ArrayList<>();
-        addFigura(f);
+        figuras = ((Rectangle) f).getFiguras();
         this.maxX = f.getMaxX();
         this.maxY = f.getMaxY();
         this.minX = f.getMinX();
@@ -164,4 +163,14 @@ public class Rectangle extends Figura {
     public static double abs (double numero) {
         return numero > 0 ? numero : -numero;
     }
+
+    public void update(Figura f) {
+        figuras = new ArrayList<>();
+        figuras.add(f);
+    }
+
+    public void setRectangle() {
+
+    }
+
 }

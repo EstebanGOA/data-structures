@@ -217,9 +217,10 @@ public class Menu {
                     double x = askForDouble("Entra la coordenada X del centre del cercle a eliminar: ");
                     double y = askForDouble("Entra la coordenada Y del centre del cercle a eliminar: ");
                     Point point = new Point(x, y, 0, null);
+
                     TreeR treeR = new TreeR();
                     this.rectangle = treeR.delete(this.rectangle, point);
-                    System.out.println("hola");
+                    System.out.println("hello");
                 }
                 case "C" -> {
                     JFrame window = new JFrame();
@@ -229,6 +230,19 @@ public class Menu {
                     window.setVisible(true);
                 }
                 case "D" -> {
+                    String first = askForString("Entra del primer punt del rectangle (X,Y): ");
+                    String second = askForString("Entra del segon punt  del rectangle (X,Y): ");
+                    TreeR treeR = new TreeR();
+                    String firstPoints[] = first.split(",");
+                    String secondPoints[] = second.split(",");
+                    ArrayList<Point> similar = new ArrayList<>();
+                    treeR.searchArea(Double.parseDouble(firstPoints[0]), Double.parseDouble(firstPoints[1]), Double.parseDouble(secondPoints[0]), Double.parseDouble(secondPoints[1]), similar, rectangle);
+                    if (similar.size() > 0) {
+                        System.out.println("\nS'han trobat " + similar.size() + " cercles en aquesta àrea:\n");
+                        printPoints(similar);
+                    } else {
+                        System.out.println("\nNo se ha trobat cap cercle en aquesta àrea.");
+                    }
 
                 }
                 case "E" -> {
@@ -242,11 +256,7 @@ public class Menu {
                         treeR.searchSimilar(rectangle, x, y, radius, color, similar);
                         if (similar.size() > 0) {
                             System.out.println("\nEls cercles propers i semblants a aquest són: \n");
-                            for (int i = 0; i < similar.size(); i++) {
-                                Point p = similar.get(i);
-                                System.out.println("\t" + String.format("#%02X%02X%02X", p.getColor().getRed(), p.getColor().getGreen(), p.getColor().getBlue()) + " (" + String.format(Locale.CANADA, "%.2f", p.getMaxX()) + ", " + String.format(Locale.CANADA, "%.2f", p.getMaxY()) + ") r=" + String.format(Locale.CANADA, "%.2f", p.getRadius()));
-                            }
-                            System.out.println();
+                            printPoints(similar);
                         } else {
                             System.out.println("\nNo se ha trobat cap cercle proper a les coordenades introduides semblat.");
                         }
@@ -256,6 +266,13 @@ public class Menu {
                     return ;
                 }
             }
+        }
+    }
+
+    private void printPoints(ArrayList<Point> similar) {
+        for (int i = 0; i < similar.size(); i++) {
+            Point p = similar.get(i);
+            System.out.println("\t" + String.format("#%02X%02X%02X", p.getColor().getRed(), p.getColor().getGreen(), p.getColor().getBlue()) + " (" + String.format(Locale.CANADA, "%.2f", p.getMaxX()) + ", " + String.format(Locale.CANADA, "%.2f", p.getMaxY()) + ") r=" + String.format(Locale.CANADA, "%.2f", p.getRadius()));
         }
     }
 
