@@ -39,6 +39,12 @@ public class Rectangle extends Figura {
         return figuras.get(index);
     }
 
+
+    /**
+     * Function that returns and index of the rectangle that creates a smaller rectangle with the new figure
+     * @param figura The figure we want to check
+     * @return Returns the index of the rectangle that forms a smaller rectangle
+     */
     public int checkArea(Figura figura) {
         double dif;
         int best = 0;
@@ -103,10 +109,10 @@ public class Rectangle extends Figura {
     }
 
 
-    public double getArea() {
-        return (maxX - minX) * (maxY - minY);
-    }
 
+    /**
+     * Update the area of the rectangle
+     */
     public void updateArea() {
 
         maxX = Double.MIN_VALUE;
@@ -132,6 +138,10 @@ public class Rectangle extends Figura {
 
     }
 
+    /**
+     * Finds the center of the rectangle.
+     * @return Returns the coordinates of the center.
+     */
     @Override
     public double[] findCenter() {
         double[] center = new double[2];
@@ -170,13 +180,6 @@ public class Rectangle extends Figura {
         return numero > 0 ? numero : -numero;
     }
 
-    public void update(Figura f) {
-        figuras = new ArrayList<>();
-        figuras.add(f);
-    }
 
-    public void setRectangle() {
-
-    }
 
 }

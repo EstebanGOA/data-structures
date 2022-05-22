@@ -1,5 +1,8 @@
 package entities;
 
+/**
+ * Class Figura used in R-tree algorithms
+ */
 public abstract class Figura {
 
     private String parent;

@@ -5,6 +5,7 @@ import entities.User;
 
 public class Algorithm {
 
+
     public User binarySearch(User[] users, int id, int low, int high) {
 
         if (high >= low) {

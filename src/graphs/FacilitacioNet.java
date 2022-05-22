@@ -42,11 +42,15 @@ public class FacilitacioNet {
             int nova;
             int actual = nodeInical;
             d[actual] = 0;
+            // CHeck if we are in the final node
             while (!users[nodeFinal].isVisited()) {
                 ArrayList<Follow> followed = users[actual].getFollowed();
                 for (int i = 0; i < followed.size(); i++) {
+                    // Get the index of the next user
                     int adj = a.binSearch(users, followed.get(i).getIdUser(), 0, users.length);
+                    // Check if we have visited the node
                     if (!users[adj].isVisited()) {
+                        // Check if the new cost to arrive to the node is better than the actual cost
                         nova = d[actual] + followed.get(i).getTimestamp();
                         if (d[adj] > nova) {
                             d[adj] = nova;
@@ -60,8 +64,10 @@ public class FacilitacioNet {
                         }
                     }
                 }
+                // Mark the node as visited
                 users[actual].setVisited(true);
                 int seguent = Integer.MAX_VALUE;
+
                 for (int i = 0; i < users.length; i++) {
                     if (seguent > d[i] && !users[i].isVisited()) {
                         seguent = d[i];
