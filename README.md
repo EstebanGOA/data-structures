@@ -38,3 +38,6 @@ autobalance.
 
 No hemos implementado ningún control de excepciones por parte del usuario, es decir, si al compilar el usuario introduce
 un valor diferente al esperado desconocemos como se comportara el sistema. 
+
+Del mismo modo, cuando pedimos identificadores si dicho identificador no existe dentro de las listas es probable que 
+salte una excepción que tampoco está controlado y se parará el sistema. 
