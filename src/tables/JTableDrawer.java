@@ -4,6 +4,9 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
+/**
+ * Clase que se encargará de crear un histograma con la información pasada.
+ */
 public class JTableDrawer extends JPanel {
 
     private final int WIDTH = 1280;
@@ -12,6 +15,10 @@ public class JTableDrawer extends JPanel {
     private int[] values = new int[7];
     private final String[] days = new String[]{"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
 
+    /**
+     * Constructor de JTableDrawer
+     * @param values Valores que ocuparán las gráficas que mostraremos en la ventana.
+     */
     public JTableDrawer(int[] values)
     {
         this.values = values;
@@ -21,6 +28,10 @@ public class JTableDrawer extends JPanel {
     }
 
 
+    /**
+     * Función encargada de pintar el histograma el iniciar la ventana.
+     * @param g the <code>Graphics</code> object to protect
+     */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);

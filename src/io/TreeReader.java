@@ -1,7 +1,7 @@
 package io;
 
-import entities.Node;
-import entities.Tree;
+import trees.Node;
+import trees.Tree;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -42,6 +42,8 @@ public class TreeReader {
                 Node nodeAux = new Node(Integer.parseInt(inputParse[0]), inputParse[1], inputParse[2], inputParse[3], Long.parseLong(inputParse[4]));
                 // insert node
                 node = tree.insertAVL(node, nodeAux);
+                // node = tree.insert(node, nodeAux);
+
             }
 
             return node;

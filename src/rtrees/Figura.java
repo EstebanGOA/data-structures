@@ -1,4 +1,4 @@
-package entities;
+package rtrees;
 
 public abstract class Figura {
 

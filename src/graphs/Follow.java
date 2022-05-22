@@ -1,4 +1,4 @@
-package entities;
+package graphs;
 
 public class Follow {
 

@@ -1,6 +1,5 @@
-package entities;
+package graphs;
 
-import entities.User;
 // TODO: Si introducimos un 'id' que no existe saltará una excepción.
 
 public class Algorithm {

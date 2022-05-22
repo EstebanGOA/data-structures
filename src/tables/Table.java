@@ -1,8 +1,5 @@
 package tables;
 
-import utilities.ArrayList;
-import tables.Advertising;
-
 public class Table {
 
     private Advertising[] list;
@@ -24,6 +21,11 @@ public class Table {
         this.length = initialSize * multiplier;
     }
 
+    /**
+     * Método encargado de añadir un nuevo anuncio a nuestra lista.
+     * @param key String Valor clave que identifica a nuestro anuncio.
+     * @param advertising Advertising que queremos guardar en nuestra lista.
+     */
     public void put(String key, Advertising advertising) {
 
         int position = hash(key);
@@ -33,7 +35,7 @@ public class Table {
             int i = 1;
 
             while (list[position] != null) {
-                position = quadraticProbing(key, i);
+                position = collision(key, i);
                 i++;
             }
 
@@ -44,6 +46,27 @@ public class Table {
 
     }
 
+    /**
+     * Método que usaremos en caso de detectar una colisión que recalculará una nueva posición.
+     * @param key String Valor calve que identifica al anuncio.
+     * @param i Integer Cantidad de colisiones detectadas.
+     * @return Integer Nueva posición calculada.
+     */
+    private int collision(String key, int i) {
+        // Si queremos cambiar el algoritmo de recálculo para cuando ocurren colisiones tendremos que cambiar la
+        // función utilizada en esta línea.
+        int position;
+        position = quadraticProbing(key, i);
+        // position = linearProbing(key, i);
+        // position = doubleHashing(key, i);
+        return position;
+    }
+
+    /**
+     * Método que buscará en nuestra lista un anuncio determinado y lo devolverá.
+     * @param key String Valor clave que identifica al objeto buscado.
+     * @return Advertising Objeto buscado.
+     */
     public Advertising get(String key) {
 
         int i = 1;
@@ -62,7 +85,7 @@ public class Table {
         // Si el valor clave no coincide con el valor original comprobamos las siguientes posiciones.
         while(true) {
 
-            position = quadraticProbing(key, i);
+            position = collision(key, i);
 
             // Si encontramos otro valor nulo significa que no está en la lista.
             if (list[position] == null) {
@@ -79,6 +102,10 @@ public class Table {
         }
     }
 
+    /**
+     * Método que se encargará de buscar el objeto guardado en la lista y lo eliminará.
+     * @param key String Valor clave que identifica el objeto buscado.
+     */
     public void remove(String key) {
 
         int i = 1;
@@ -99,7 +126,7 @@ public class Table {
         // Si el valor clave no coincide con el valor original comprobamos las siguientes posiciones.
         while(true) {
 
-            position = quadraticProbing(key, i);
+            position = collision(key, i);
 
             // Si encontramos otro valor nulo significa que no está en la lista
             if (list[position] == null) {
@@ -118,6 +145,11 @@ public class Table {
 
     }
 
+    /**
+     * Método que convertirá el valor clave en un entero que marcará la posición donde colocaremos nuestro anuncio.
+     * @param key String Valor clave que identifica al anuncio.
+     * @return Integer con la posición calculada.
+     */
     private int hash(String key) {
         int h = 0;
         for (char i : key.toCharArray()) {
@@ -126,24 +158,44 @@ public class Table {
         return h % length;
     }
 
+    /**
+     * Método que recalculará una posición para el valor utilizado un algoritmo de linear probing.
+     * @param key String Valor clave que identifica al anuncio.
+     * @param i Integer Cantidad de colisiones encontradas.
+     * @return Integer Nueva posición calculada.
+     */
     private int linearProbing(String key, int i) {
         return (hash(key) + i) % length;
     }
 
-
+    /**
+     * Método que recalculará una posición para el valor utilizado un algoritmo de quadratic probing.
+     * @param key String valor clave que identifica al anuncio.
+     * @param i Integer Cantidad de colisiones encontradas.
+     * @return Integer Nueva posición calculada.
+     */
     private int quadraticProbing(String key, int i) {
         final int c1 = 2;
         final int c2 = 4;
         return (hash(key) + c1 * i + c2 * i ^ 2) % length;
     }
 
+    /**
+     * Método que recalculará una posición para el valor utilizado un algoritmo de double hashing.
+     * @param key String valor clave que identifica al anuncio.
+     * @param i Integer Cantidad de colisiones encontradas.
+     * @return Integer Nueva posición calculada.
+     */
     private int doubleHashing(String key, int i) {
         int value = hash(key);
         return (value + value * i) % length;
     }
 
-        public int[] countDays() {
-
+    /**
+     * Método que contará la cantidad de anuncios que hay para cada día.
+     * @return Array Cada posición del array almacenará un contador para cada día diferente.
+     */
+    public int[] countDays() {
         int[] values = new int[7];
 
         for (int i = 0; i < length; i++) {
@@ -163,7 +215,6 @@ public class Table {
             }
 
         }
-
         return values;
     }
 }

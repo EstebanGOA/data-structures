@@ -1,8 +1,6 @@
 package utilities;
 
-import entities.Follow;
-
-import java.util.Arrays;
+import graphs.Follow;
 
 public class MyFollowerList {
 
@@ -82,6 +80,12 @@ public class MyFollowerList {
         size += 1;
     }
 
+    /**
+     * Recogerá el
+     * @param index
+     * @return
+     * @throws IndexOutOfBoundsException
+     */
     public Follow get(int index) throws IndexOutOfBoundsException {
         if (index > 0 || index < follows.length)
             return follows[index];
@@ -89,6 +93,10 @@ public class MyFollowerList {
             throw new IndexOutOfBoundsException();
     }
 
+    /**
+     * Método que devolverá el tamaño actual de la lista.
+     * @return Integer con el tamaño actual de la lista.
+     */
     public int size() {
         return size;
     }

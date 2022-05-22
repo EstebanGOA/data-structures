@@ -1,10 +1,11 @@
-package entities;
+package graphs;
 
+import graphs.Follow;
 import utilities.ArrayList;
-import utilities.MyFollowerList;
 
-import java.util.Arrays;
-
+/**
+ * Clase encargada de almacenar la información de los usuarios.
+ */
 public class User {
 
     private final int id;
@@ -20,6 +21,13 @@ public class User {
     private boolean visited;
     private double points;
 
+    /**
+     * Constructor de User.
+     * @param id Integer Identificador del usuario.
+     * @param name String Nombre del usuario.
+     * @param alias String Alias del usuario.
+     * @param interests String[] Array con los intereses del usuario.
+     */
     public User(int id, String name, String alias, String[] interests) {
         this.id = id;
         this.name = name;
@@ -42,10 +50,6 @@ public class User {
         } else {
             points++;
         }
-    }
-
-    public void setFollows(ArrayList<Follow> follows) {
-        this.follows = follows;
     }
 
     public ArrayList<Follow> getFollowed() {
@@ -82,10 +86,6 @@ public class User {
 
     public double getPoints() {
         return points;
-    }
-
-    public void setPoints(double points) {
-        this.points = points;
     }
 
     @Override

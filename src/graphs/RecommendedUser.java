@@ -1,4 +1,4 @@
-package entities;
+package graphs;
 
 /**
  * Clase donde guardaremos los datos relacionados con la recomendación para cada usuario así como información relevante.
@@ -27,6 +27,11 @@ public class RecommendedUser {
      */
     private int interests;
 
+    /**
+     * Constructor de RecommendedUser.
+     * @param user User Usuario en el que nos encontramos.
+     * @param predecessor User Usuario por el que es seguido user.
+     */
     public RecommendedUser(User user, User predecessor) {
         this.user = user;
         this.predecessor = predecessor;
@@ -35,8 +40,10 @@ public class RecommendedUser {
         this.interests = 0;
     }
 
+    /**
+     * Método que imprimirá por pantalla la información del usuario.
+     */
     public void show() {
-
         System.out.println("\t" + user.getId() + " - " + user.getName() + " (" + user.getAlias() + ")");
         System.out.print("\tInteressos: ");
         String[] values = user.getInterests();
@@ -74,14 +81,26 @@ public class RecommendedUser {
         System.out.println("\n");
     }
 
+    /**
+     * Método que indicará que el usuario es seguido.
+     * @param follower Boolean Que indica si el usuario es seguido.
+     */
     public void setFollower(boolean follower) {
         this.follower = follower;
     }
 
+    /**
+     * Método que indicará que el usuario es cercano.
+     * @param nearby Boolean Que indica si el usuario es cercano.
+     */
     public void setNearby(boolean nearby) {
         this.nearby = nearby;
     }
 
+    /**
+     * Método que indicará cuantos intereses tienen en común.
+     * @param interests Integer Con la cantidad de intereses que tienen en común.
+     */
     public void setInterests(int interests) {
         this.interests = interests;
     }

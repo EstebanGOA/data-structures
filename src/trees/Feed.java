@@ -1,12 +1,7 @@
 package trees;
 
-import entities.Node;
-import entities.Tree;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.util.Date;
 
 /**
  * Se encargará de listar los nodos de nuestro árbol ordenados por su fecha de creación, cuanto más nuevo sea antes aparecerá.

@@ -1,19 +1,18 @@
 package entities;
 
-import graphs.DramaContext;
-import graphs.FacilitacioNet;
-import graphs.NetworkScan;
+import graphs.*;
 import io.RTreeReader;
 import io.TreeReader;
 import io.UserReader;
+import rtrees.JTreeDraw;
+import rtrees.Point;
+import rtrees.Rectangle;
+import rtrees.TreeR;
 import tables.Advertising;
 import tables.JTableDrawer;
 import tables.Table;
-import tables.TablesReader;
-import trees.TreeDelete;
-import graphs.Recommendation;
-import trees.Feed;
-import trees.TreeSearchNode;
+import io.TablesReader;
+import trees.*;
 import utilities.ArrayList;
 
 import javax.swing.*;
@@ -136,7 +135,7 @@ public class Menu {
                 }
                 case "B" -> {
                     int id = askForInteger("Identificador de l'algorisme: ");
-                    TreeDelete treeDelete = new TreeDelete(source);
+                    TreeDelete treeDelete = new TreeDelete();
                     source = treeDelete.run(source, id);
                 }
                 case "C" -> {
@@ -204,7 +203,7 @@ public class Menu {
                     try {
 
                         Color color = Color.decode(askForString("Entra el color del cercle a afegir: "));
-                        Point point = new Point(x, y, radius, color);
+                        rtrees.Point point = new rtrees.Point(x, y, radius, color);
                         TreeR treeR = new TreeR();
                         this.rectangle = treeR.delete(this.rectangle, point);
 
@@ -216,7 +215,7 @@ public class Menu {
                 case "B" -> {
                     double x = askForDouble("Entra la coordenada X del centre del cercle a eliminar: ");
                     double y = askForDouble("Entra la coordenada Y del centre del cercle a eliminar: ");
-                    Point point = new Point(x, y, 0, null);
+                    rtrees.Point point = new rtrees.Point(x, y, 0, null);
 
                     TreeR treeR = new TreeR();
                     this.rectangle = treeR.delete(this.rectangle, point);
@@ -224,6 +223,7 @@ public class Menu {
                 }
                 case "C" -> {
                     JFrame window = new JFrame();
+                    window.setResizable(false);
                     window.setSize(1920, 1080);
                     JTreeDraw draw = new JTreeDraw(rectangle);
                     window.add(draw, BorderLayout.CENTER);
@@ -235,7 +235,7 @@ public class Menu {
                     TreeR treeR = new TreeR();
                     String firstPoints[] = first.split(",");
                     String secondPoints[] = second.split(",");
-                    ArrayList<Point> similar = new ArrayList<>();
+                    ArrayList<rtrees.Point> similar = new ArrayList<>();
                     treeR.searchArea(Double.parseDouble(firstPoints[0]), Double.parseDouble(firstPoints[1]), Double.parseDouble(secondPoints[0]), Double.parseDouble(secondPoints[1]), similar, rectangle);
                     if (similar.size() > 0) {
                         System.out.println("\nS'han trobat " + similar.size() + " cercles en aquesta àrea:\n");
@@ -251,7 +251,7 @@ public class Menu {
                     double radius = askForDouble("Entra el radi del cercle a cercar: ");
                     try {
                         Color color = Color.decode(askForString("Entra el color del cercle a cercar: "));
-                        ArrayList<Point> similar = new ArrayList<>();
+                        ArrayList<rtrees.Point> similar = new ArrayList<>();
                         TreeR treeR = new TreeR();
                         treeR.searchSimilar(rectangle, x, y, radius, color, similar);
                         if (similar.size() > 0) {
@@ -269,7 +269,7 @@ public class Menu {
         }
     }
 
-    private void printPoints(ArrayList<Point> similar) {
+    private void printPoints(ArrayList<rtrees.Point> similar) {
         for (int i = 0; i < similar.size(); i++) {
             Point p = similar.get(i);
             System.out.println("\t" + String.format("#%02X%02X%02X", p.getColor().getRed(), p.getColor().getGreen(), p.getColor().getBlue()) + " (" + String.format(Locale.CANADA, "%.2f", p.getMaxX()) + ", " + String.format(Locale.CANADA, "%.2f", p.getMaxY()) + ") r=" + String.format(Locale.CANADA, "%.2f", p.getRadius()));

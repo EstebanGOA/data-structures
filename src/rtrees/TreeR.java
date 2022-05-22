@@ -1,20 +1,21 @@
-package entities;
+package rtrees;
 
 import java.awt.*;
+
 import utilities.ArrayList;
 
 public class TreeR {
 
     private int flag = 0;
-    private Rectangle next;
+    private rtrees.Rectangle next;
 
 
     private int flag2 = 0;
 
-    public Rectangle insert(Rectangle r, Point p) {
+    public rtrees.Rectangle insert(rtrees.Rectangle r, Point p) {
         // Caso de ir al siguiente rectangulo
-        if (r.getFigura(0) instanceof Rectangle) {
-            insert((Rectangle) r.getFigura( r.checkArea(p)), p);
+        if (r.getFigura(0) instanceof rtrees.Rectangle) {
+            insert((rtrees.Rectangle) r.getFigura( r.checkArea(p)), p);
         }
 
         // This if serves as a condition to go back to the previous rectangle,
@@ -33,8 +34,8 @@ public class TreeR {
             flag = 1;
             next = r;
         } else if (r.getFiguras().size() > 3 && r.getParent().equals("root")) {
-            Rectangle aux = new Rectangle(r);
-            r = new Rectangle(aux.getMaxX(), aux.getMaxY(), aux.getMinX(), aux.getMinY());
+            rtrees.Rectangle aux = new rtrees.Rectangle(r);
+            r = new rtrees.Rectangle(aux.getMaxX(), aux.getMaxY(), aux.getMinX(), aux.getMinY());
             r.addFigura(aux);
             r.setParent("root");
 
@@ -49,20 +50,20 @@ public class TreeR {
         return r;
 
     }
-    public void expand(Rectangle r, Rectangle root) {
+    public void expand(rtrees.Rectangle r, rtrees.Rectangle root) {
 
 
 
 
         Figura min = r.getMinPoint();
         Figura max = r.getMaxPoint();
-        Figura rectangle1 = new Rectangle(min.getMaxX(), min.getMaxY(), min.getMinX(), min.getMinY());
-        Figura rectangle2 = new Rectangle(max.getMaxX(), max.getMaxY(), max.getMinX(), max.getMinY());
+        Figura rectangle1 = new rtrees.Rectangle(min.getMaxX(), min.getMaxY(), min.getMinX(), min.getMinY());
+        Figura rectangle2 = new rtrees.Rectangle(max.getMaxX(), max.getMaxY(), max.getMinX(), max.getMinY());
 
         r.removeFigura(min);
         r.removeFigura(max);
 
-        Rectangle aux = r;
+        rtrees.Rectangle aux = r;
 
         rectangle1.addFigura(min);
         rectangle2.addFigura(max);
@@ -85,14 +86,14 @@ public class TreeR {
 
     }
 
-    public Rectangle delete(Rectangle r, Point p ) {
+    public rtrees.Rectangle delete(rtrees.Rectangle r, Point p ) {
         int index = 0;
-        if ( r.getFigura(0) instanceof  Rectangle) {
+        if ( r.getFigura(0) instanceof rtrees.Rectangle) {
             index =  r.checkArea(p);
-           delete((Rectangle) r.getFigura(index), p);
+           delete((rtrees.Rectangle) r.getFigura(index), p);
         }
 
-        if ( r.getFigura(0) instanceof  Point) {
+        if ( r.getFigura(0) instanceof Point) {
             for(int i = 0; i < r.getFiguras().size(); i++ ) {
                 if (r.getFigura(i).getMaxX() == p.getMaxX()
                         && r.getFigura(i).getMaxY() == p.getMaxY()) {
@@ -134,7 +135,16 @@ public class TreeR {
         return Math.sqrt((y - p.getMinY()) * (y - p.getMinY()) + (x - p.getMinX()) * (x - p.getMinX())) < 100;
     }
 
-    private boolean contains(double minX, double minY, double maxX, double maxY, Rectangle r) {
+    /**
+     *
+     * @param minX
+     * @param minY
+     * @param maxX
+     * @param maxY
+     * @param r
+     * @return
+     */
+    private boolean contains(double minX, double minY, double maxX, double maxY, rtrees.Rectangle r) {
         double dx = r.getMaxX() - r.getMinX();
         double dy = r.getMaxY() - r.getMinY();
         return ((minX - r.getMinX()) >= 0 || (maxX - r.getMaxX()) <= dx) || ((minY - r.getMinY()) >= 0 || (maxY - r.getMaxY()) <= dy);
@@ -149,8 +159,8 @@ public class TreeR {
     public void searchArea(double minX, double minY, double maxX, double maxY, ArrayList<Point> similar, Figura f) {
         // Tenemos que tener en cuenta que la esquina superior izquierda de la pantalla es el (0,0), es decir, que nuestros
         // valores mínimos y máximos van al revés.
-        if (f instanceof Rectangle) {
-            Rectangle r = (Rectangle) f;
+        if (f instanceof rtrees.Rectangle) {
+            rtrees.Rectangle r = (rtrees.Rectangle) f;
             // En la función que comprobara si está dentro de dicho rectángulo introduciremos los puntos al revés.
             if (contains(maxX, maxY, minX, minY, r)) {
                 ArrayList<Figura> list = r.getFiguras();
@@ -167,7 +177,7 @@ public class TreeR {
     }
 
     public void searchSimilar(Figura r, int x, int y, double radius, Color color, ArrayList<Point> similar) {
-        if (r instanceof Rectangle) {
+        if (r instanceof rtrees.Rectangle) {
             ArrayList<Figura> list = ((Rectangle) r).getFiguras();
             for (int i = 0; i < list.size(); i++) {
                 searchSimilar(list.get(i), x, y, radius, color, similar);

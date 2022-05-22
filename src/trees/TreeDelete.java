@@ -1,22 +1,41 @@
 package trees;
 
-import entities.Node;
-import entities.Tree;
-
+/**
+ * Clase que almacenará las funciones relacionadas con la eliminación de un nodo del árbol.
+ */
 public class TreeDelete {
 
-    private Tree tree;
+    /**
+     * Necesitamos un objeto de la clase Tree para acceder a la función de autobalanceo.
+     */
+    private final Tree tree;
 
-    public TreeDelete(Node source) {
+    /**
+     * Constructor de TreeDelete.
+     */
+    public TreeDelete() {
         this.tree = new Tree();
     }
 
+    /**
+     * Método que iniciará la eliminación de un nodo del árbol.
+     * @param source Node Nodo raíz del árbol.
+     * @param id Integer Identificador del Node que queremos eliminiar.
+     * @return Node Nueva raíz del árbol con todos los cambios realizados.
+     */
     public Node run(Node source, int id) {
         return deleteById(source, id);
     }
 
-
+    /**
+     * Método que buscará el nodo y lo eliminará del árbol.
+     * @param parent Node Nodo actual.
+     * @param id Integer Número identificador del Node.
+     * @return Node Nueva raíz del árbol con todos los cambios realizados.
+     */
     public Node deleteById(Node parent, int id) {
+
+        // En primer lugar, buscaremos el nodo que queremos eliminar de forma recursiva.
 
         if (parent == null)
             return null;
@@ -28,6 +47,8 @@ public class TreeDelete {
         if (parent.getId() != id) {
             parent.setRight(deleteById(parent.getRight(), id));
         }
+
+        // Cuando encontremos el nodo buscado comprobaremos si tiene hijos o no.
 
         if (parent.getId() == id) {
 

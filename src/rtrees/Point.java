@@ -1,4 +1,4 @@
-package entities;
+package rtrees;
 
 import java.awt.*;
 

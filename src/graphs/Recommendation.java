@@ -1,9 +1,5 @@
 package graphs;
 
-import entities.Algorithm;
-import entities.Follow;
-import entities.RecommendedUser;
-import entities.User;
 import utilities.ArrayList;
 import java.util.Objects;
 
@@ -43,7 +39,7 @@ public class Recommendation {
 
         this.source = a.binarySearch(users, id, 0, users.length-1);
 
-        System.out.println("Potser t'interessa seguir els següents comptes: \n");
+        System.out.println("\nPotser t'interessa seguir els següents comptes: \n");
 
         dfs(users, null, source, 0);
 

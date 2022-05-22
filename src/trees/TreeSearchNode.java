@@ -1,13 +1,17 @@
 package trees;
 
-import entities.Node;
-
 import utilities.ArrayList;
 
+/**
+ * Clase que se encargará de almacenar los métodos para la búsqueda de nodos en el árbol.
+ */
 public class TreeSearchNode {
 
     private ArrayList<Node> printer;
 
+    /**
+     * Constructor de TreeSearchNode.
+     */
     public TreeSearchNode() {
         printer = new ArrayList<>();
     }
@@ -16,7 +20,6 @@ public class TreeSearchNode {
      * Ire comparando mi numero con un timestamp de un nodo, si es mayor,
      * coge el nodo derecho y lo pongo em el nodo que miro, sino coge el izquierdo.
      * Si por algun caso me da exception, eso es que no hay menor/mayor, significa que no existe
-     * @param num   numero exacto que tengo que buscar
      * @param node nodo inicial, de donde cuelgan todos los otros
      */
     public void findByTimestamp(Node node, long timestamp){
@@ -38,6 +41,12 @@ public class TreeSearchNode {
 
     }
 
+    /**
+     * Método que buscará y imprimirá por pantalla los nodos que estén dentro del rango de timestamp especificado.
+     * @param source Node Nodo raíz del árbol.
+     * @param lowerTimestamp Valor inferior del rango de timestamp a buscar.
+     * @param higherTimestamp Valor superior del rango de timestamp a buscar.
+     */
     public void findByRange(Node source, long lowerTimestamp, long higherTimestamp) {
 
         search(source, lowerTimestamp, higherTimestamp);

@@ -1,6 +1,13 @@
-package entities;
+package trees;
 
+/**
+ * Clase que almacenará las funciones para trabajar sobre un árbol.
+ */
 public class Tree {
+
+    // NOTA: Si queremos cambiar del árbol sin balancear al autobalanceado o viceversa, tendremos que cambiar el insert en la
+    // clase TreeReader que está en el paquete io. Además, en la clase TreeDelete al final de la función deleteById(),
+    // tendremos que realizar los cambios que se especifican al final de la función para que no sé auto-balance después de eliminar.
 
     /**
      * Algoritmo sin autobalanceo que añade los nodos ordenados por su timestamp.
@@ -67,7 +74,10 @@ public class Tree {
 
         int balance = getBalance(parent);
 
+        // Nuestro árbol está desbalanceado por la derecha.
         if (balance > 1) {
+            // Si nuestro hijo derecho tiene un balanceo superior a 0 necesitaremos hacer dos rotaciones, en caso contrario,
+            // solo necesitaremos una.
             if (getBalance(parent.getRight()) >= 0) {
                 parent = leftRotate(parent);
             } else {
@@ -76,7 +86,10 @@ public class Tree {
             }
         }
 
+        // Nuestro árbol está desbalanceado por la izquierda.
         if (balance < -1) {
+            // Si nuestro hijo izquierdo tiene un balanceo superior a 0 necesitemos hacer dos rotaciones, en caso contrario,
+            // solo necesitaremos una.
             if (getBalance(parent.getLeft()) <= 0) {
                 parent = rightRotate(parent);
             } else {

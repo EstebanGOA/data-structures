@@ -1,9 +1,6 @@
 package graphs;
 
-import entities.Algorithm;
-import entities.Follow;
 import utilities.MyQueue;
-import entities.User;
 
 import java.util.Arrays;
 

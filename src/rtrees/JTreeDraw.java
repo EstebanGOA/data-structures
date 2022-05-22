@@ -1,4 +1,4 @@
-package entities;
+package rtrees;
 
 import utilities.ArrayList;
 
@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class JTreeDraw extends JPanel {
+
     private Figura f;
 
     public JTreeDraw(Figura f) {

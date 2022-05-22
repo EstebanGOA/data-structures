@@ -1,4 +1,4 @@
-package entities;
+package trees;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -6,7 +6,7 @@ import java.time.Instant;
 import java.util.Date;
 
 /**
- *
+ * Clase que se encargará de almacenar toda la información relacionada con un nodo.
  */
 public class Node {
 
@@ -22,8 +22,15 @@ public class Node {
     private Node right;
     private Node left;
     private int height;
-    private int balance;
 
+    /**
+     * Constructor de Node
+     * @param id Identificador del algoritmo.
+     * @param name Nombre del algoritmo.
+     * @param language Lenguaje de programación del algoritmo.
+     * @param cost Coste del algoritmo.
+     * @param timestamp Fecha de creación del algoritmo.
+     */
     public Node(int id, String name, String language, String cost, long timestamp) {
         this.id = id;
         this.name = name;
@@ -36,10 +43,6 @@ public class Node {
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -62,16 +65,8 @@ public class Node {
         return cost;
     }
 
-    public void setCost(String cost) {
-        this.cost = cost;
-    }
-
     public long getTimestamp() {
         return timestamp;
-    }
-
-    public void setTimestamp(long timestamp) {
-        this.timestamp = timestamp;
     }
 
     public Node getRight() {
@@ -90,25 +85,16 @@ public class Node {
         this.left = left;
     }
 
-    public int getHeight() {
-        return height;
-    }
-
     public void setHeight(int height) {
         this.height = height;
     }
 
-
+    /**
+     * Método que formateará el timestamp y nos lo devolverá en un formato más comprensible.
+     * @return String Fecha del nodo con un formato más compresible.
+     */
     public String getTimestampDate(){
         // dd/mm/yy hh/mm/ss
-        /*
-        long YY, MM, DD, hh, mm, ss;
-        ss = timestamp % 60;
-        mm = (timestamp/60) % 60;
-        DD = (timestamp / 3600) % 24;
-        YY = (timestamp % 31556926) + 1971;     // year + 1970 que es cuando comienza el unix
-        MM = (timestamp % 2629743) % 12;        // month %12 pq el año tiene 12 meses
-        */
         DateFormat df = new SimpleDateFormat("dd/mm/yyyy hh:mm:ss");
         return df.format(Date.from(Instant.ofEpochSecond(this.timestamp)));
     }

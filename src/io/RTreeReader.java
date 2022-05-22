@@ -1,13 +1,10 @@
 package io;
 
-import entities.*;
-import entities.Point;
-import entities.Rectangle;
+import rtrees.Point;
+import rtrees.Rectangle;
+import rtrees.TreeR;
 
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.AdjustmentEvent;
-import java.awt.event.AdjustmentListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;

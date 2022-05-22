@@ -1,7 +1,7 @@
 package io;
 
-import entities.Follow;
-import entities.User;
+import graphs.Follow;
+import graphs.User;
 
 import java.io.File;
 import java.io.FileNotFoundException;

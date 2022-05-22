@@ -1,13 +1,9 @@
 package utilities;
 
-import entities.Follow;
-
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Iterator;
 
 /**
- * Versión genérica de un Array.
+ * Lista que almacenará objetos de diferentes clases.
  *
  * @param <E> tipo de valor que vamos a almacenar.
  */
