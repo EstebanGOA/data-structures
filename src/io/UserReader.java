@@ -12,7 +12,7 @@ import java.util.Scanner;
  */
 public class UserReader {
 
-    private final String path = "data/graphs/graphXS.paed";
+    private final String path = "data/graphXS.paed";
 
     public User[] readFile() {
 

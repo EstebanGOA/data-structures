@@ -15,7 +15,7 @@ public class TreeReader {
     /**
      * Ruta relativa de la ubicación del fichero.
      */
-    private final String path = "data/trees/treeXXS.paed";
+    private final String path = "data/treeXXS.paed";
 
     /**
      * Cargará el fichero y creará la estructura del árbol.
