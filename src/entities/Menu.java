@@ -14,9 +14,11 @@ import trees.TreeDelete;
 import graphs.Recommendation;
 import trees.Feed;
 import trees.TreeSearchNode;
+import utilities.ArrayList;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Menu {
@@ -198,11 +200,17 @@ public class Menu {
                 case "A" -> {
                     double x = askForDouble("Entra la coordenada X del centre del cercle a afegir: ");
                     double y = askForDouble("Entra la coordenada Y del centre del cercle a afegir: ");
-                    double radious = askForDouble("Entra el radi del cercle a afegir: ");
-                    String color = askForString("Entra el color del cercle a afegir: ");
-                    Point point = new Point(x, y, radious, color);
-                    TreeR treeR = new TreeR();
-                    this.rectangle = treeR.delete(this.rectangle, point);
+                    double radius = askForDouble("Entra el radi del cercle a afegir: ");
+                    try {
+
+                        Color color = Color.decode(askForString("Entra el color del cercle a afegir: "));
+                        Point point = new Point(x, y, radius, color);
+                        TreeR treeR = new TreeR();
+                        this.rectangle = treeR.delete(this.rectangle, point);
+
+                    } catch (NumberFormatException e) {
+                        System.out.println("\n\tPunto no insertado");
+                    }
 
                 }
                 case "B" -> {
@@ -224,6 +232,27 @@ public class Menu {
 
                 }
                 case "E" -> {
+                    int x = askForInteger(("Entra la coordenada X del centre del cercle a cercar: "));
+                    int y = askForInteger("Entra la coordenada Y del centre del cercle a cercar: ");
+                    double radius = askForDouble("Entra el radi del cercle a cercar: ");
+                    try {
+                        Color color = Color.decode(askForString("Entra el color del cercle a cercar: "));
+                        ArrayList<Point> similar = new ArrayList<>();
+                        TreeR treeR = new TreeR();
+                        treeR.searchSimilar(rectangle, x, y, radius, color, similar);
+                        if (similar.size() > 0) {
+                            System.out.println("\nEls cercles propers i semblants a aquest són: \n");
+                            for (int i = 0; i < similar.size(); i++) {
+                                Point p = similar.get(i);
+                                System.out.println("\t" + String.format("#%02X%02X%02X", p.getColor().getRed(), p.getColor().getGreen(), p.getColor().getBlue()) + " (" + String.format(Locale.CANADA, "%.2f", p.getMaxX()) + ", " + String.format(Locale.CANADA, "%.2f", p.getMaxY()) + ") r=" + String.format(Locale.CANADA, "%.2f", p.getRadius()));
+                            }
+                            System.out.println();
+                        } else {
+                            System.out.println("\nNo se ha trobat cap cercle proper a les coordenades introduides semblat.");
+                        }
+                    } catch (NumberFormatException e) {
+
+                    }
                     return ;
                 }
             }

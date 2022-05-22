@@ -19,6 +19,7 @@ public class Rectangle extends Figura {
         this.minX = minX;
         this.minY = minY;
     }
+
     public Rectangle(Figura f) {
         figuras = new ArrayList<>();
         addFigura(f);
@@ -45,15 +46,11 @@ public class Rectangle extends Figura {
         int best = 0;
         double bestArea = Double.MAX_VALUE;
 
-
-
-
         for (int i = 0; i < figuras.size(); i++) {
             double[] aux1 = figuras.get(i).findCenter();
             double[] aux2 = figura.findCenter();
 
             dif = abs(aux1[0] - aux2[0]) + abs(aux1[1] - aux2[1]);
-
 
             // Check the perimeter that is smaller with the new point inside
             if (dif < bestArea) {
@@ -103,7 +100,6 @@ public class Rectangle extends Figura {
          figuras.remove(f);
     }
 
-
     public double getArea() {
         return (maxX - minX) * (maxY - minY);
     }
@@ -152,8 +148,6 @@ public class Rectangle extends Figura {
     public double getMaxX() {
         return maxX;
     }
-
-
 
     public double getMaxY() {
         return maxY;
