@@ -7,6 +7,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+/**
+ * Clase que se encargará de leer el fichero para cargar la información de los usuarios para completar el grafo.
+ */
 public class UserReader {
 
     private final String path = "data/graphs/graphXS.paed";

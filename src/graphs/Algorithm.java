@@ -4,6 +4,14 @@ package graphs;
 
 public class Algorithm {
 
+    /**
+     * Método que realizará una búsqueda binaria para encontrar un usuario.
+     * @param users Lista de usuarios.
+     * @param id Identificador del usuario que estamos buscando.
+     * @param low Pivote inferior.
+     * @param high Pivote superior.
+     * @return User El usuario que estamos buscando.
+     */
     public User binarySearch(User[] users, int id, int low, int high) {
 
         if (high >= low) {
@@ -24,6 +32,14 @@ public class Algorithm {
         return null;
     }
 
+    /**
+     * Método que realizará una búsqueda binaria para encontrar la posición del usuario dentro de la lista.
+     * @param users Lista de los usuarios.
+     * @param id Identificador del usuario.
+     * @param low Pivote inferior.
+     * @param high Pivote superior.
+     * @return Integer Posición de la lista en la que se encuentra el usuario buscado.
+     */
     public int binSearch(User[] users, int id, int low, int high) {
 
         if (high >= low) {
@@ -48,10 +64,10 @@ public class Algorithm {
     /**
      * Algoritmo de ordenación (quicksort) de forma descendente por el número de seguidos que tiene un usuario.
      *
-     * @param users
-     * @param low
-     * @param high
-     * @return
+     * @param users Lista de usuarios.
+     * @param low Pivote inferior.
+     * @param high Pivote superior.
+     * @return Lista de los usuarios ordenados.
      */
     public User[] sortByFollows(User[] users, int low, int high) {
         int lastPivot;

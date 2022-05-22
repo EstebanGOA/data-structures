@@ -9,8 +9,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-
-
+/**
+ * Clase que se encargará de leer el fichero para cargar la información de los árboles R.
+ */
 public class RTreeReader {
 
         /**
@@ -38,7 +39,6 @@ public class RTreeReader {
 
                 TreeR treeR = new TreeR();
 
-
                 Point point = new Point(Float.parseFloat(inputParse[0]),
                         Float.parseFloat(inputParse[1]),
                         Float.parseFloat(inputParse[2]),
@@ -51,10 +51,6 @@ public class RTreeReader {
                 root.addFigura(r);
                 root.setParent("root");
 
-
-
-
-
                 for (int i = 0; i < numColors - 1; i++) {
                     input = myReader.nextLine();
                     inputParse = input.split(";");
@@ -64,10 +60,7 @@ public class RTreeReader {
                             Float.parseFloat(inputParse[2]),
                             Color.decode(inputParse[3]));
                     root = treeR.insert(root, pointAux);
-
-
                 }
-
                 return root;
 
             } catch (FileNotFoundException e) {

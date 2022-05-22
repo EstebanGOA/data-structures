@@ -16,16 +16,20 @@ public class Tree {
      * @param node Nodo actual en el que nos encontramos.
      */
     public Node insert(Node parent, Node node) {
-
+        // Check if the node we want to insert has lower timestamp
         if (parent.getTimestamp() > node.getTimestamp()) {
+            // Check if is a leaf, if is a leaf we add the node else we keep searching
+            // and now the parent is the left node
             if (parent.getLeft() == null) {
                 parent.setLeft(node);
             } else {
                 parent.setLeft(insert(parent.getLeft(), node));
             }
         }
-
+        // Check if the node we want to insert has higher timestamp
         if (parent.getTimestamp() < node.getTimestamp()) {
+            // Check if is a leaf, if is a leaf we add the node else we keep searching
+            // and now the parent is the right node
             if (parent.getRight() == null) {
                 parent.setRight(node);
             } else {

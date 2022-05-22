@@ -9,30 +9,42 @@ public class DramaContext {
     private User[] users;
     private Algorithm algorithm;
 
+    /**
+     * Constructor to copy the users and not lose references
+     * @param users the users in the system
+     */
     public DramaContext(User[] users){
         this.users = Arrays.copyOf(users, users.length);
         algorithm = new Algorithm();
     }
+
+    /**
+     * Function that topo sorts
+     */
     public void topoSort(){
         MyQueue queue = new MyQueue();
+        // first we get all the nodes that aren't that don't have dependency
         MyQueue usersQueue = getNodes(users); // Queue with all the nodes that aren't being followed
 
         while (!usersQueue.isEmpty()) {
-
+            // Pop the first user and check all the people he follows
             User u = usersQueue.get();
             usersQueue.remove();
+            // Add him to the final queue
             queue.add(u);
             for (int i = 0; i < u.getFollowed().size(); i++) {
-
+                // Get the index of the user by using binary search
                 int index = algorithm.binSearch(users, u.getFollowed().get(i).getIdUser(), 0, users.length);
 
                 for(int j = 0; j < users[index].getFollows().size(); j++) {
-                    // Remove the follows
 
+                    // Remove the follows so we can check them later
+                    // if we don't do this they will always have dependencies, so it is vital
+                    // for the proper deployment of the algorithms
                     if(users[index].getFollows().get(j).getIdUser() == u.getId()){
                         users[index].getFollows().remove(users[index].getFollows().get(j));
 
-
+                        // Check if the user still has follows
                         if(users[index].getFollows().isEmpty()){
                             usersQueue.add(users[index]);
                         }
@@ -42,7 +54,7 @@ public class DramaContext {
             }
 
         }
-
+        // Show the results
         while(!queue.isEmpty()){
             User u = queue.get();
             queue.remove();

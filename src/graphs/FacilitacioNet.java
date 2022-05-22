@@ -22,9 +22,6 @@ public class FacilitacioNet {
 
     public void dijkstra() {
 
-
-
-
             Arrays.fill(d, Integer.MAX_VALUE);
             Camins[] camins = new Camins[users.length];
 
@@ -37,11 +34,15 @@ public class FacilitacioNet {
             int nova;
             int actual = nodeInical;
             d[actual] = 0;
+            // Check if we are in the final node
             while (!users[nodeFinal].isVisited()) {
                 ArrayList<Follow> followed = users[actual].getFollowed();
                 for (int i = 0; i < followed.size(); i++) {
+                    // Get the index of the next user
                     int adj = a.binSearch(users, followed.get(i).getIdUser(), 0, users.length);
+                    // Check if we have visited the node
                     if (!users[adj].isVisited()) {
+                        // Check if the new cost to arrive to the node is better than the actual cost
                         nova = d[actual] + followed.get(i).getTimestamp();
                         if (d[adj] > nova) {
                             d[adj] = nova;
@@ -49,14 +50,16 @@ public class FacilitacioNet {
                             for (int j = 0; j < camins[actual].size(); j++) {
                                 User aux = camins[actual].get(j);
                                 camins[adj].add(aux);
-
                             }
                             camins[adj].add(users[adj]);
                         }
                     }
                 }
+
+                // Mark the node as visited
                 users[actual].setVisited(true);
                 int seguent = Integer.MAX_VALUE;
+
                 for (int i = 0; i < users.length; i++) {
                     if (seguent > d[i] && !users[i].isVisited()) {
                         seguent = d[i];
@@ -77,6 +80,7 @@ public class FacilitacioNet {
                 System.out.println((i + 1) + "- " + camins[nodeFinal].get(i).getName() + " (" + camins[nodeFinal].get(i).getAlias() + ")");
                 if (i != camins[nodeFinal].size() - 1) System.out.println("↓");
             }
+
             System.out.println("The total cost is: " + d[nodeFinal]);
 
         }

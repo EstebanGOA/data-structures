@@ -7,7 +7,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-
+/**
+ * Clase que se encargará de leer el fichero para cargar la información de los árboles binarios.
+ */
 public class TreeReader {
 
     /**

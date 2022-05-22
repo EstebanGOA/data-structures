@@ -2,6 +2,9 @@ package graphs;
 
 import utilities.ArrayList;
 
+/**
+ * Clase que almacenará funciones que nos serán utiles para la implementación del Dijkstra. 
+ */
 public class Camins {
 
     private ArrayList<User> cami;
