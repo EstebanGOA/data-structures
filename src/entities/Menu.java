@@ -14,9 +14,11 @@ import trees.TreeDelete;
 import graphs.Recommendation;
 import trees.Feed;
 import trees.TreeSearchNode;
+import utilities.ArrayList;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Menu {
@@ -198,11 +200,17 @@ public class Menu {
                 case "A" -> {
                     double x = askForDouble("Entra la coordenada X del centre del cercle a afegir: ");
                     double y = askForDouble("Entra la coordenada Y del centre del cercle a afegir: ");
-                    double radious = askForDouble("Entra el radi del cercle a afegir: ");
-                    String color = askForString("Entra el color del cercle a afegir: ");
-                    Point point = new Point(x, y, radious, color);
-                    TreeR treeR = new TreeR();
-                    this.rectangle = treeR.delete(this.rectangle, point);
+                    double radius = askForDouble("Entra el radi del cercle a afegir: ");
+                    try {
+
+                        Color color = Color.decode(askForString("Entra el color del cercle a afegir: "));
+                        Point point = new Point(x, y, radius, color);
+                        TreeR treeR = new TreeR();
+                        this.rectangle = treeR.delete(this.rectangle, point);
+
+                    } catch (NumberFormatException e) {
+                        System.out.println("\n\tPunto no insertado");
+                    }
 
                 }
                 case "B" -> {
@@ -222,12 +230,49 @@ public class Menu {
                     window.setVisible(true);
                 }
                 case "D" -> {
+                    String first = askForString("Entra del primer punt del rectangle (X,Y): ");
+                    String second = askForString("Entra del segon punt  del rectangle (X,Y): ");
+                    TreeR treeR = new TreeR();
+                    String firstPoints[] = first.split(",");
+                    String secondPoints[] = second.split(",");
+                    ArrayList<Point> similar = new ArrayList<>();
+                    treeR.searchArea(Double.parseDouble(firstPoints[0]), Double.parseDouble(firstPoints[1]), Double.parseDouble(secondPoints[0]), Double.parseDouble(secondPoints[1]), similar, rectangle);
+                    if (similar.size() > 0) {
+                        System.out.println("\nS'han trobat " + similar.size() + " cercles en aquesta àrea:\n");
+                        printPoints(similar);
+                    } else {
+                        System.out.println("\nNo se ha trobat cap cercle en aquesta àrea.");
+                    }
 
                 }
                 case "E" -> {
+                    int x = askForInteger(("Entra la coordenada X del centre del cercle a cercar: "));
+                    int y = askForInteger("Entra la coordenada Y del centre del cercle a cercar: ");
+                    double radius = askForDouble("Entra el radi del cercle a cercar: ");
+                    try {
+                        Color color = Color.decode(askForString("Entra el color del cercle a cercar: "));
+                        ArrayList<Point> similar = new ArrayList<>();
+                        TreeR treeR = new TreeR();
+                        treeR.searchSimilar(rectangle, x, y, radius, color, similar);
+                        if (similar.size() > 0) {
+                            System.out.println("\nEls cercles propers i semblants a aquest són: \n");
+                            printPoints(similar);
+                        } else {
+                            System.out.println("\nNo se ha trobat cap cercle proper a les coordenades introduides semblat.");
+                        }
+                    } catch (NumberFormatException e) {
+
+                    }
                     return ;
                 }
             }
+        }
+    }
+
+    private void printPoints(ArrayList<Point> similar) {
+        for (int i = 0; i < similar.size(); i++) {
+            Point p = similar.get(i);
+            System.out.println("\t" + String.format("#%02X%02X%02X", p.getColor().getRed(), p.getColor().getGreen(), p.getColor().getBlue()) + " (" + String.format(Locale.CANADA, "%.2f", p.getMaxX()) + ", " + String.format(Locale.CANADA, "%.2f", p.getMaxY()) + ") r=" + String.format(Locale.CANADA, "%.2f", p.getRadius()));
         }
     }
 

@@ -1,8 +1,7 @@
 package entities;
 
-import org.w3c.dom.css.Rect;
-
-import java.util.ArrayList;
+import java.awt.*;
+import utilities.ArrayList;
 
 public class TreeR {
 
@@ -15,10 +14,8 @@ public class TreeR {
     public Rectangle insert(Rectangle r, Point p) {
         // Caso de ir al siguiente rectangulo
         if (r.getFigura(0) instanceof Rectangle) {
-
             insert((Rectangle) r.getFigura( r.checkArea(p)), p);
         }
-
 
         // This if serves as a condition to go back to the previous rectangle,
         // before doing the expand of 2 rectangles when we have 4 points
@@ -147,4 +144,68 @@ public class TreeR {
     }
 
 
+
+    private boolean isColorSimilar(Color a, Color b) {
+        double difference = Math.sqrt(((a.getRed() - b.getRed()) * (a.getRed() - b.getRed())) +
+                            ((a.getBlue() - b.getBlue()) * (a.getBlue() - b.getBlue())) +
+                            ((a.getGreen() - b.getGreen()) * (a.getGreen() - b.getGreen())));
+
+        return difference < 100;
+    }
+
+    private boolean isRadiusSimilar(double a, double b) {
+        return (a - b) < 5;
+    }
+
+    private boolean isClose(Point p, int x, int y) {
+        return Math.sqrt((y - p.getMinY()) * (y - p.getMinY()) + (x - p.getMinX()) * (x - p.getMinX())) < 100;
+    }
+
+    private boolean contains(double minX, double minY, double maxX, double maxY, Rectangle r) {
+        double dx = r.getMaxX() - r.getMinX();
+        double dy = r.getMaxY() - r.getMinY();
+        return ((minX - r.getMinX()) >= 0 || (maxX - r.getMaxX()) <= dx) || ((minY - r.getMinY()) >= 0 || (maxY - r.getMaxY()) <= dy);
+    }
+
+    private boolean contains(double minX, double minY, double maxX, double maxY, Point r) {
+        double dx = r.getMaxX() - r.getMinX();
+        double dy = r.getMaxY() - r.getMinY();
+        return ((minX - r.getMinX()) >= 0 && (maxX - r.getMaxX()) <= dx) && ((minY - r.getMinY()) >= 0 && (maxY - r.getMaxY()) <= dy);
+    }
+
+    public void searchArea(double minX, double minY, double maxX, double maxY, ArrayList<Point> similar, Figura f) {
+        // Tenemos que tener en cuenta que la esquina superior izquierda de la pantalla es el (0,0), es decir, que nuestros
+        // valores mínimos y máximos van al revés.
+        if (f instanceof Rectangle) {
+            Rectangle r = (Rectangle) f;
+            // En la función que comprobara si está dentro de dicho rectángulo introduciremos los puntos al revés.
+            if (contains(maxX, maxY, minX, minY, r)) {
+                ArrayList<Figura> list = r.getFiguras();
+                for (int i = 0; i < list.size(); i++) {
+                    searchArea(minX, minY, maxX, maxY, similar, list.get(i));
+                }
+            }
+        } else {
+            Point p = (Point) f;
+            if (contains(maxX, maxY, minX, minY, p)) {
+                similar.add(p);
+            }
+        }
+    }
+
+    public void searchSimilar(Figura r, int x, int y, double radius, Color color, ArrayList<Point> similar) {
+        if (r instanceof Rectangle) {
+            ArrayList<Figura> list = ((Rectangle) r).getFiguras();
+            for (int i = 0; i < list.size(); i++) {
+                searchSimilar(list.get(i), x, y, radius, color, similar);
+            }
+        } else {
+            Point p = (Point) r;
+            if (isClose(p, x, y)) {
+                if (isColorSimilar(color, p.getColor()) && isRadiusSimilar(radius, p.getRadius())) {
+                    similar.add(p);
+                }
+            }
+        }
+    }
 }

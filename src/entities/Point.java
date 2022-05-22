@@ -1,16 +1,22 @@
 package entities;
 
+import java.awt.*;
+
 public class Point extends Figura {
     private double x;
     private double y;
     private double radius;
-    private String color;
+    private Color color;
 
-    public Point(double x, double y, double radius, String color) {
+    public Point(double x, double y, double radius, Color color) {
         this.x = x;
         this.y = y;
         this.radius = radius;
         this.color = color;
+    }
+
+    public Color getColor() {
+        return color;
     }
 
     public double getSuma() {
@@ -54,5 +60,10 @@ public class Point extends Figura {
         center[1] = y;
         return center;
     }
+
+    public double getRadius() {
+        return radius;
+    }
+
 }
 

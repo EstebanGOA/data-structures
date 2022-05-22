@@ -19,7 +19,7 @@ public class RTreeReader {
         /**
          * Ruta relativa de la ubicación del fichero.
          */
-        private final String path = "data/rtreeXXL.paed";
+        private final String path = "data/rtreeXS.paed";
 
         /**
          * Cargará el fichero y creará la estructura del árbol R.
@@ -45,7 +45,7 @@ public class RTreeReader {
                 Point point = new Point(Float.parseFloat(inputParse[0]),
                         Float.parseFloat(inputParse[1]),
                         Float.parseFloat(inputParse[2]),
-                        inputParse[3]);
+                        Color.decode(inputParse[3]));
 
 
                 Rectangle r = new Rectangle(point.getMaxX(), point.getMaxY(), point.getMinX(), point.getMinY());
@@ -65,7 +65,7 @@ public class RTreeReader {
                     Point pointAux = new Point(Float.parseFloat(inputParse[0]),
                             Float.parseFloat(inputParse[1]),
                             Float.parseFloat(inputParse[2]),
-                            inputParse[3]);
+                            Color.decode(inputParse[3]));
                     root = treeR.insert(root, pointAux);
 
 

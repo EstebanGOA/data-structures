@@ -15,7 +15,7 @@ public class TablesReader {
     /**
      * Ruta relativa de la ubicación del fichero.
      */
-    private final String path = "data/tables/tablesL.paed";
+    private final String path = "data/tables/tablesM.paed";
 
     /**
      * Cargará el fichero y creará la estructura del árbol.
